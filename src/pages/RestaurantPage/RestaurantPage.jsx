@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import CardRestaurantDetail from '../../components/CardRestaurantDetail/CardRestaurantDetail';
 import CardProduct from '../../components/CardProduct/CardProduct';
 import { Container, ContainerProdutos, Separator, BoxProdutos, CategoryTitle } from './styled';
+import Loader from '../../components/Loader/Loader';
 
 export default function RestaurantPage() {
 
@@ -13,7 +14,7 @@ export default function RestaurantPage() {
 
   return (
     <Container>
-        {isLoading ? <p>Loading...</p> : (
+        {isLoading ? <Loader/> : (
             <>
             <div>
                 <CardRestaurantDetail 

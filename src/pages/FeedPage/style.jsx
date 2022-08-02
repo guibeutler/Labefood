@@ -16,6 +16,7 @@ export const ContainerRest = styled.div`
   border-bottom: 1px solid #9c9c9c;
   h3 {
     padding-left: 16px;
+    color: ${(props) => props.theme.colors.darkPeach};
   }
   img {
     width: 100%;
@@ -67,7 +68,8 @@ export const Category = styled.button`
   background-color: transparent;
   border: none;
   font-weight: bold;
+  color: ${(props) => (props.selected ? props.theme.colors.darkPeach : '#000000')};
   :hover {
-    color: orange;
+    color: ${props => props.theme.colors.darkPeach};
   }
 `;

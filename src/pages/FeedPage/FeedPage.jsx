@@ -43,7 +43,7 @@ export default function FeedPage() {
   const categoryList = states.restaurants.map((item, index) => {
     return (
       <li key={index}>
-        <Category onClick={() => setCategory(item.category)}>
+        <Category selected={category === item.category} onClick={() => setCategory(item.category)}>
           {item.category}
         </Category>
       </li>
@@ -59,7 +59,7 @@ export default function FeedPage() {
         </Button>
         <ul ref={categoryBar}>
           <li>
-            <Category onClick={() => setCategory('')}>Todos</Category>
+            <Category selected={category === ""} onClick={() => setCategory('')}>Todos</Category>
           </li>
           {categoryList}
         </ul>
