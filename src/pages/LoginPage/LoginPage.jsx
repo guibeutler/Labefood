@@ -14,26 +14,12 @@ export default function LoginPage() {
 
   const onSubmitForm = (event) => {
     event.preventDefault();
-    axios.post(`${BASE_URL}login`, form)
-    .then((res) => {
-        localStorage.setItem('token', res.data.token);
-        goToFeed(navigate);
-        console.log(form);
-    })
+    axios.post(`${BASE_URL}/login`, form).then((res) => {
+      localStorage.setItem('token', res.data.token);
+      goToFeed(navigate);
+      clean();
+    });
   };
-
-  //   const Login = (form, clean, navigate) => {
-  //     axios
-  //       .post(`${BASE_URL}/login`, form)
-  //       .then((res) => {
-  //         localStorage.setItem('token', res.data.token);
-  //         clean();
-  //         goToFeed(navigate);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   };
 
   return (
     <div>
