@@ -18,9 +18,10 @@ export default function FeedPage() {
   const [category, setCategory] = useState('');
   const categoryBar = useRef(null);
 
+
   const getRestaurants = () => {
     axios
-      .get(`${BASE_URL}restaurants`, {
+      .get(`${BASE_URL}/restaurants`, {
         headers: {
           auth: localStorage.getItem('token'),
         },

@@ -3,6 +3,7 @@ import { useRestaurantDetails } from '../../hooks/useRestaurantDetails';
 import { useParams } from 'react-router-dom';
 import CardRestaurantDetail from '../../components/CardRestaurantDetail/CardRestaurantDetail';
 import CardProduct from '../../components/CardProduct/CardProduct';
+import { Container, ContainerProdutos, Separator, BoxProdutos, CategoryTitle } from './styled';
 
 export default function RestaurantPage() {
 
@@ -11,7 +12,7 @@ export default function RestaurantPage() {
 
 
   return (
-    <div style={{margin: "12px"}}>
+    <Container>
         {isLoading ? <p>Loading...</p> : (
             <>
             <div>
@@ -25,33 +26,38 @@ export default function RestaurantPage() {
                 />
             </div>
 
-            {categorys.map((category, i) => {
-                return (
-                    <div key={i}>
-                        <h1>{category}</h1> 
-                            <div>
-                                {restaurant.products.filter(product => {
-                                    return product.category === category
-                                }).map(product => {
-                                    return (
-                                        <CardProduct 
-                                        key={product.id}
-                                        RestaurantId={id}
-                                        id={product.id}
-                                        image={product.photoUrl} 
-                                        name={product.name} 
-                                        description={product.description} 
-                                        price={product.price} 
-                                        /> 
-                                    )
-                                })}
-                            </div>
-                    </div>
-                )
-            })}
+            <ContainerProdutos>
+
+                {categorys.map((category, i) => {
+                    return (
+                        <div key={i}>
+                            <CategoryTitle>{category}</CategoryTitle> 
+                            <Separator />
+                                <BoxProdutos>
+                                    {restaurant.products.filter(product => {
+                                        return product.category === category
+                                    }).map(product => {
+                                        return (
+                                            <CardProduct 
+                                            key={product.id}
+                                            RestaurantId={id}
+                                            id={product.id}
+                                            image={product.photoUrl} 
+                                            name={product.name} 
+                                            description={product.description} 
+                                            price={product.price} 
+                                            /> 
+                                        )
+                                    })}
+                                </BoxProdutos>
+                        </div>
+                    )
+                })}
+
+            </ContainerProdutos>
 
             </>
         )}
-    </div>
+    </Container>
   )
 }
