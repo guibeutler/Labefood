@@ -6,12 +6,13 @@ import { Container, CategoryNavBar, Button, Category } from './style';
 import CardRestaurantFeed from '../../components/CardRestaurantFeed/CardRestaurantFeed';
 import CardFilterFeed from '../../components/CardFilterFeed/CardFilterFeed';
 import GlobalContext from '../../context/GlobalContext';
+import Header from '../../components/Header/Header';
+import GoToTop from '../../components/GoToTop/GoToTop';
 
 export default function FeedPage() {
   const { states, setters } = useContext(GlobalContext);
   const [category, setCategory] = useState('');
   const categoryBar = useRef(null);
-
 
   const getRestaurants = () => {
     axios
@@ -51,6 +52,7 @@ export default function FeedPage() {
 
   return (
     <Container>
+      <Header button={false} text={'Rappi4'} />
       <CategoryNavBar>
         <Button onClick={handleLeftClick}>
           <MdKeyboardArrowLeft size={'32px'} />
@@ -70,6 +72,7 @@ export default function FeedPage() {
       ) : (
         <CardRestaurantFeed />
       )}
+      <GoToTop />
     </Container>
   );
 }
