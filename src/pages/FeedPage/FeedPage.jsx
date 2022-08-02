@@ -48,6 +48,7 @@ export default function FeedPage() {
     event.preventDefault();
     categoryBar.current.scrollLeft += categoryBar.current.offsetWidth;
   };
+]
 
   const categoryList = states.restaurants.map((item, index) => {
     return (

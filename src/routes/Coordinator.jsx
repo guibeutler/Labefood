@@ -33,4 +33,8 @@ export const goToProfile = (navigate) =>{
 
 }
 
+export const goToSearch = (navigate) =>{
+    navigate("/search")
+
+}
 
