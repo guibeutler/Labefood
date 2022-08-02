@@ -12,6 +12,7 @@ import {
 } from './style';
 import { useNavigate } from 'react-router-dom';
 import CardRestaurantFeed from '../../components/CardRestaurantFeed/CardRestaurantFeed';
+import CardFilterFeed from '../../components/CardFilterFeed/CardFilterFeed';
 import GlobalContext from '../../context/GlobalContext';
 
 export default function FeedPage() {
