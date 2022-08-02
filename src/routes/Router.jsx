@@ -6,6 +6,7 @@ import ProfilePage from "../pages/ProfilePage/ProfilePage";
 import SignUpPage from "../pages/SignUpPage/SignUpPage";
 import ShoppingCartPage from "../pages/ShoppingCartPage/ShoppingCartPage";
 import DefaultPage from "../pages/DefaultPage/DefaultPage";
+import { SearchPage } from '../pages/SearchPage/SearchPage';
 
 
 const Router = () => {
@@ -14,7 +15,8 @@ const Router = () => {
             <Routes>
                 <Route index element={<DefaultPage/>}/>
                 <Route path="addressRegistration" element={<AddressRegistrationPage/>}/>
-                <Route path="/feed" elemen={<FeedPage/>}/>
+                <Route path="/feed" element={<FeedPage/>}/>
+                <Route path='/search' element={<SearchPage/>}/>
                 <Route path="/login" element={<LoginPage/>}/>
                 <Route path="/profile" element={<ProfilePage/>}/>
                 <Route path="./signup" element={<SignUpPage/>}/>
