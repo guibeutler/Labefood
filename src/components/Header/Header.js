@@ -8,7 +8,7 @@ const Header = (props) => {
   return (
     <Container>
       {props.button ? (
-        <Button onClick={goToBack(navigate)}>
+        <Button onClick={() => goToBack(navigate)}>
           <MdKeyboardArrowLeft size={'32px'} />
         </Button>
       ) : null}

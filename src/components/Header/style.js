@@ -10,7 +10,7 @@ export const Container = styled.div`
   margin-bottom: 4px;
 `;
 
-export const Button = styled.div`
+export const Button = styled.button`
   border: none;
   background-color: transparent;
   position: absolute;
