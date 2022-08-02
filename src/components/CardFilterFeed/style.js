@@ -12,6 +12,7 @@ export const ContainerRest = styled.div`
   cursor: pointer;
   h3 {
     padding-left: 16px;
+    color: ${(props) => props.theme.colors.darkPeach};
   }
   img {
     width: 100%;
