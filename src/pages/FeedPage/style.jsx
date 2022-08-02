@@ -4,7 +4,6 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
 `;
 
 export const ContainerRest = styled.div`
@@ -40,14 +39,13 @@ export const CategoryNavBar = styled.nav`
   display: flex;
   text-align: center;
   align-items: center;
-  background-color: #cdcdcd;
   justify-content: center;
+  margin-bottom: 16px;
   ul {
     list-style: none;
     width: 90vw;
     display: flex;
     overflow-x: auto;
-    scroll-behavior: smooth;
     gap: 10px;
     font-weight: bold;
     padding: 8px 0px;
