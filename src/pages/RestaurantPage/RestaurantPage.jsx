@@ -41,7 +41,8 @@ export default function RestaurantPage() {
                                         image={product.photoUrl} 
                                         name={product.name} 
                                         description={product.description} 
-                                        price={product.price} 
+                                        price={product.price}
+                                        details ={restaurant}
                                         /> 
                                     )
                                 })}
