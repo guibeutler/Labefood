@@ -60,7 +60,7 @@ export default function ProfilePage() {
         <Card key={index}>
             <Title>{item.restaurantName}</Title>
             <DateProduct>{dataAtualFormatada()}</DateProduct>
-            <Price>SUBTOTAL R${item.totalPricerice}</Price>
+            <Price>SUBTOTAL R${item.totalPrice}</Price>
         </Card>
         </Purchases> 
         
