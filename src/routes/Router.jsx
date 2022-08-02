@@ -23,10 +23,10 @@ const Router = () => {
 
                 <Route path='/search' element={<SearchPage/>}/>
 
-
+ 
                 <Route path="/login" element={<LoginPage/>}/>
                 <Route path="/profile" element={<ProfilePage/>}/>
-                <Route path="./signup" element={<SignUpPage/>}/>
+                <Route path="/signup" element={<SignUpPage/>}/>
                 <Route path="/shoppingcart" element={<ShoppingCartPage/>}/>
                 <Route path="/restaurant/:id" element={<RestaurantPage/>}/>
                 <Route path="/404" element={<div>Error</div>}/>
