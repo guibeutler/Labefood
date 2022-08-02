@@ -6,7 +6,7 @@ import ProfilePage from "../pages/ProfilePage/ProfilePage";
 import SignUpPage from "../pages/SignUpPage/SignUpPage";
 import ShoppingCartPage from "../pages/ShoppingCartPage/ShoppingCartPage";
 import DefaultPage from "../pages/DefaultPage/DefaultPage";
-
+import RestaurantPage from "../pages/RestaurantPage/RestaurantPage";
 
 const Router = () => {
     return(
@@ -14,11 +14,12 @@ const Router = () => {
             <Routes>
                 <Route index element={<DefaultPage/>}/>
                 <Route path="addressRegistration" element={<AddressRegistrationPage/>}/>
-                <Route path="/feed" elemen={<FeedPage/>}/>
+                <Route path="/feed" element={<FeedPage/>}/>
                 <Route path="/login" element={<LoginPage/>}/>
                 <Route path="/profile" element={<ProfilePage/>}/>
                 <Route path="./signup" element={<SignUpPage/>}/>
                 <Route path="/shoppingcart" element={<ShoppingCartPage/>}/>
+                <Route path="/restaurant/:id" element={<RestaurantPage/>}/>
                 <Route path="/404" element={<div>Error</div>}/>
                 <Route path="*" element={<Navigate replace to="/404"/>}/>
             </Routes>
