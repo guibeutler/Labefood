@@ -29,3 +29,17 @@ export const Info = styled.div`
   padding: 4px 16px;
   color: #9c9c9c;
 `;
+
+export const Container = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @media (min-width: 800px) {
+    flex-direction: row;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    max-width: 1400px;
+  }
+`;

@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import GlobalContext from '../../context/GlobalContext';
 import { goToRestaurantDetail } from '../../routes/Coordinator';
-import { ContainerRest, Info } from './style';
+import { ContainerRest, Info, Container } from './style';
 
 const CardRestaurantFeed = () => {
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ const CardRestaurantFeed = () => {
         </ContainerRest>
       );
     });
-  return <div>{restaurantsListNoFilter}</div>;
+  return <Container>{restaurantsListNoFilter}</Container>;
 };
 
 export default CardRestaurantFeed;

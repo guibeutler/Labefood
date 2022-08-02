@@ -36,7 +36,6 @@ export const Info = styled.div`
 
 export const CategoryNavBar = styled.nav`
   width: 100vw;
-  max-width: 400px;
   display: flex;
   text-align: center;
   align-items: center;
@@ -54,6 +53,12 @@ export const CategoryNavBar = styled.nav`
   ul::-webkit-scrollbar {
     display: none;
   }
+  @media (min-width: 800px) {
+    width: 60vw;
+    li {
+      margin: 0px auto;
+    }
+  }
 `;
 
 export const Button = styled.button`
@@ -68,8 +73,9 @@ export const Category = styled.button`
   background-color: transparent;
   border: none;
   font-weight: bold;
-  color: ${(props) => (props.selected ? props.theme.colors.darkPeach : '#000000')};
+  color: ${(props) =>
+    props.selected ? props.theme.colors.darkPeach : '#000000'};
   :hover {
-    color: ${props => props.theme.colors.darkPeach};
+    color: ${(props) => props.theme.colors.darkPeach};
   }
 `;
