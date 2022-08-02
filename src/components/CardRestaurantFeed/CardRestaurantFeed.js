@@ -1,7 +1,8 @@
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import GlobalContext from '../../context/GlobalContext';
-import { ContainerRest, Info } from './style';
+import { goToRestaurantDetail } from '../../routes/Coordinator';
+import { ContainerRest, Info, Container } from './style';
 
 const CardRestaurantFeed = () => {
   const navigate = useNavigate();
@@ -10,7 +11,10 @@ const CardRestaurantFeed = () => {
     states.restaurants &&
     states.restaurants.map((restaurant, index) => {
       return (
-        <ContainerRest key={index} onClick={() => navigate()}>
+        <ContainerRest
+          key={index}
+          onClick={() => goToRestaurantDetail(navigate, restaurant.id)}
+        >
           <img src={restaurant.logoUrl} />
           <h3>{restaurant.name}</h3>
           <Info>
@@ -22,7 +26,7 @@ const CardRestaurantFeed = () => {
         </ContainerRest>
       );
     });
-  return <div>{restaurantsListNoFilter}</div>;
+  return <Container>{restaurantsListNoFilter}</Container>;
 };
 
 export default CardRestaurantFeed;

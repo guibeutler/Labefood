@@ -53,4 +53,5 @@ export const Button = styled.button`
     margin-top: 40px;
     padding: 10px 0;
     text-transform: uppercase;
+    color: #4a90e2;
 `

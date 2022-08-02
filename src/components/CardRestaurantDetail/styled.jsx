@@ -6,7 +6,6 @@ export const Container = styled.div`
 
 export const BoxLogo = styled.div`
     width: 100%;
-    min-width: 300px;
     overflow: hidden;
 `
 
@@ -28,16 +27,14 @@ export const Title = styled.h1`
     font-size: 1.1rem;
 `
 export const CategoryTitle = styled.h2`
-    font-size: 1.1rem;
-
-
+    font-size: 1rem;
 `
 export const BoxDelivery = styled.div`
     display: flex;
     gap: 8px;
-    font-size: 1.1rem;
+    font-size: 1rem;
 
 `
 export const Address = styled.div`
-    font-size: 1.1rem;
+    font-size: 1rem;
 `

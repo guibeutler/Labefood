@@ -9,8 +9,10 @@ export const ContainerRest = styled.div`
   border-right: 1px solid #9c9c9c;
   border-bottom: 1px solid #9c9c9c;
   margin-bottom: 16px;
+  cursor: pointer;
   h3 {
     padding-left: 16px;
+    color: ${(props) => props.theme.colors.darkPeach};
   }
   img {
     width: 100%;
