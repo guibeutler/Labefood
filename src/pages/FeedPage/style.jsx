@@ -5,6 +5,7 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 16px;
+  padding-bottom: 16px;
 `;
 
 export const ContainerRest = styled.div`
@@ -35,18 +36,22 @@ export const Info = styled.div`
 `;
 
 export const CategoryNavBar = styled.nav`
-  width: 90vw;
+  width: 100vw;
   max-width: 400px;
   display: flex;
   text-align: center;
   align-items: center;
+  background-color: #cdcdcd;
+  justify-content: center;
   ul {
     list-style: none;
+    width: 90vw;
     display: flex;
     overflow-x: auto;
     scroll-behavior: smooth;
     gap: 10px;
     font-weight: bold;
+    padding: 8px 0px;
   }
   ul::-webkit-scrollbar {
     display: none;

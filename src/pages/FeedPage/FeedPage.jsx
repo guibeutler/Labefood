@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
-import { BASE_URL, token } from '../../constants/BASE_URL';
+import { BASE_URL } from '../../constants/BASE_URL';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 import {
   Container,
@@ -20,7 +20,7 @@ export default function FeedPage() {
 
   const getRestaurants = () => {
     axios
-      .get(`${BASE_URL}restaurants`, {
+      .get(`${BASE_URL}/restaurants`, {
         headers: {
           auth: localStorage.getItem('token'),
         },
@@ -47,14 +47,34 @@ export default function FeedPage() {
 
   const categoryFilter = (item) => {
     setCategory(item);
-    // restaurants.map((item) => console.log(item.category)).filter(category);
   };
 
-  const restaurantsList = restaurants
-    .filter((item) => item.category === category)
-    .map((restaurant, index) => {
+  // Lista de restaurantes com filtro //
+  const restaurantsList =
+    restaurants &&
+    restaurants
+      .filter((item) => item.category === category)
+      .map((restaurant, index) => {
+        return (
+          <ContainerRest key={index}>
+            <img src={restaurant.logoUrl} />
+            <h3>{restaurant.name}</h3>
+            <Info>
+              <p>
+                {restaurant.deliveryTime} - {restaurant.deliveryTime + 10} min
+              </p>
+              <p>Frete: R$ {restaurant.shipping},00</p>
+            </Info>
+          </ContainerRest>
+        );
+      });
+
+  // Lista de restaurantes sem filtros //
+  const restaurantsListNoFilter =
+    restaurants &&
+    restaurants.map((restaurant, index) => {
       return (
-        <ContainerRest key={index}>
+        <ContainerRest key={index} onClick={() => navigate()}>
           <img src={restaurant.logoUrl} />
           <h3>{restaurant.name}</h3>
           <Info>
@@ -66,20 +86,6 @@ export default function FeedPage() {
         </ContainerRest>
       );
     });
-  const restaurantsListNoFilter = restaurants.map((restaurant, index) => {
-    return (
-      <ContainerRest key={index} onClick={() => navigate()}>
-        <img src={restaurant.logoUrl} />
-        <h3>{restaurant.name}</h3>
-        <Info>
-          <p>
-            {restaurant.deliveryTime} - {restaurant.deliveryTime + 10} min
-          </p>
-          <p>Frete: R$ {restaurant.shipping},00</p>
-        </Info>
-      </ContainerRest>
-    );
-  });
 
   const categoryList = restaurants.map((item, index) => {
     return (
@@ -97,7 +103,12 @@ export default function FeedPage() {
         <Button onClick={handleLeftClick}>
           <MdKeyboardArrowLeft size={'32px'} />
         </Button>
-        <ul ref={categoryBar}>{categoryList}</ul>
+        <ul ref={categoryBar}>
+          <li>
+            <Category onClick={() => setCategory('')}>Todos</Category>
+          </li>
+          {categoryList}
+        </ul>
         <Button onClick={handleRightClick}>
           <MdKeyboardArrowRight size={'32px'} />
         </Button>
