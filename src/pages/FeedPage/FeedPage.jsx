@@ -38,7 +38,6 @@ export default function FeedPage() {
   useEffect(() => {
     getRestaurants();
   }, []);
-  console.log(states.restaurants);
 
   const handleLeftClick = (event) => {
     event.preventDefault();
@@ -49,67 +48,12 @@ export default function FeedPage() {
     event.preventDefault();
     categoryBar.current.scrollLeft += categoryBar.current.offsetWidth;
   };
-
-  const categoryFilter = (item) => {
-    setCategory(item);
-  };
-
-  const restaurantsList = restaurants
-    .filter((item) => item.category === category)
-    .map((restaurant, index) => {
-      return (
-        <ContainerRest key={index}>
-          <img src={restaurant.logoUrl} />
-          <h3>{restaurant.name}</h3>
-          <Info>
-            <p>
-              {restaurant.deliveryTime} - {restaurant.deliveryTime + 10} min
-            </p>
-            <p>Frete: R$ {restaurant.shipping},00</p>
-          </Info>
-        </ContainerRest>
-      );
-    });
-const restaurantsListNoFilter = restaurants.map((restaurant, index) => {
-    return (
-      <ContainerRest key={index} onClick={() => navigate()}>
-        <img src={restaurant.logoUrl} />
-        <h3>{restaurant.name}</h3>
-        <Info>
-          <p>
-            {restaurant.deliveryTime} - {restaurant.deliveryTime + 10} min
-          </p>
-          <p>Frete: R$ {restaurant.shipping},00</p>
-        </Info>
-      </ContainerRest>
-    );
-  });
-
-  // Lista de restaurantes com filtro //
-  const restaurantsList =
-    states.restaurants &&
-    states.restaurants
-      .filter((item) => item.category === category)
-      .map((restaurant, index) => {
-        return (
-          <ContainerRest key={index}>
-            <img src={restaurant.logoUrl} />
-            <h3>{restaurant.name}</h3>
-            <Info>
-              <p>
-                {restaurant.deliveryTime} - {restaurant.deliveryTime + 10} min
-              </p>
-              <p>Frete: R$ {restaurant.shipping},00</p>
-            </Info>
-          </ContainerRest>
-        );
-      });
-
+]
 
   const categoryList = states.restaurants.map((item, index) => {
     return (
       <li key={index}>
-        <Category onClick={() => categoryFilter(item.category)}>
+        <Category onClick={() => setCategory(item.category)}>
           {item.category}
         </Category>
       </li>
@@ -132,7 +76,11 @@ const restaurantsListNoFilter = restaurants.map((restaurant, index) => {
           <MdKeyboardArrowRight size={'32px'} />
         </Button>
       </CategoryNavBar>
-      {category ? restaurantsList : <CardRestaurantFeed />}
+      {category ? (
+        <CardFilterFeed category={category} />
+      ) : (
+        <CardRestaurantFeed />
+      )}
     </Container>
   );
 }
