@@ -2,22 +2,12 @@ import React, { useEffect, useState, useRef, useContext } from 'react';
 import axios from 'axios';
 import { BASE_URL } from '../../constants/BASE_URL';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
-import {
-  Container,
-  ContainerRest,
-  Info,
-  CategoryNavBar,
-  Button,
-  Category,
-} from './style';
-import { useNavigate } from 'react-router-dom';
+import { Container, CategoryNavBar, Button, Category } from './style';
 import CardRestaurantFeed from '../../components/CardRestaurantFeed/CardRestaurantFeed';
 import CardFilterFeed from '../../components/CardFilterFeed/CardFilterFeed';
 import GlobalContext from '../../context/GlobalContext';
 
 export default function FeedPage() {
-  const navigate = useNavigate();
-  // const [restaurants, setRestaurants] = useState([]);
   const { states, setters } = useContext(GlobalContext);
   const [category, setCategory] = useState('');
   const categoryBar = useRef(null);
@@ -31,7 +21,6 @@ export default function FeedPage() {
         },
       })
       .then((res) => {
-        // console.log(res.data.restaurants);
         setters.setRestaurants(res.data.restaurants);
       })
       .catch((err) => console.log(err));
