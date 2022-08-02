@@ -33,3 +33,7 @@ export const goToSearch = (navigate) => {
 export const goToRestaurantDetail = (navigate, id) => {
   navigate(`/restaurant/${id}`);
 };
+
+export const goToBack = (navigate) => {
+  navigate(-1);
+};
