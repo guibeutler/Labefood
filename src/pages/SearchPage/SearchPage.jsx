@@ -1,24 +1,20 @@
 import React, { useEffect, useState } from "react"
 import axios from "axios"
-import { BASE_URL } from "../../constants/BASE_URL"
+import { BASE_URL,token } from "../../constants/BASE_URL"
+import { TextField,InputAdornment } from "@mui/material"
+import {BsSearch} from 'react-icons/bs'
+import {Search,Text} from './Styled'
 
 export const SearchPage = () =>{
     const[restaurants,setRestaurants] = useState([])
     const[value,setValue] = useState("")
-    const token = {
-        headers:{
-            auth:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImpiVDUzTThOQ1hjVGNoaXRiMUF5IiwibmFtZSI6IkxvcnJhbiIsImVtYWlsIjoibG9ycmFuQG91dGxvb2suY29tIiwiY3BmIjoiMTIzLjk4Ny40NTYtNjUiLCJoYXNBZGRyZXNzIjp0cnVlLCJhZGRyZXNzIjoiUi4gQWZvbnNvIEJyYXosIDE3NywgNzEgLSBWaWxhIE4uIENvbmNlacOnw6NvIiwiaWF0IjoxNjU5MzgwMjg0fQ.Pq7MJ8BJsub_nfjnATCzkZMVX8qdAFPpFtRnDxM_YGg"
-        }
-    } 
-
 const getrestaurant = () =>{
-    axios.get(`${BASE_URL}restaurants`,token)
+    axios.get(`${BASE_URL}/restaurants`,token)
     .then((res)=>{
         setRestaurants(res.data.restaurants)
         console.log(res.data)})
     .catch((err)=>console.log(err))
 }
-
 useEffect(()=>{
     getrestaurant()
 },[])
@@ -42,11 +38,27 @@ const listRestaurants = mapRestaurants?.map((restaurant) => {
 
     return (
         <div>
-            <h1>search</h1>
-            <input type="text"
-            onChange={handleChange}
-            value={value}
-            placeholder={"restaurantes"}  />
+
+            <Search>
+                <TextField
+                id="input-with-icon-textfield"
+                label="Busca"
+                onChange={handleChange}
+                value={value}
+                placeholder={"restaurantes"}
+                InputProps={{
+                startAdornment: (
+                    <InputAdornment position="start">
+                    <BsSearch/>
+                    </InputAdornment>
+                ),
+                }}
+                variant="outlined"
+                        />
+                        <Text>Busque por nome de restaurantes</Text>
+            </Search>
+
+
              {listRestaurants}
         </div>
     )

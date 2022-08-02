@@ -20,7 +20,7 @@ export default function FeedPage() {
 
   const getRestaurants = () => {
     axios
-      .get(`${BASE_URL}restaurants`, {
+      .get(`${BASE_URL}/restaurants`, {
         headers: {
           auth: localStorage.getItem('token'),
         },
@@ -66,7 +66,7 @@ export default function FeedPage() {
         </ContainerRest>
       );
     });
-  const restaurantsListNoFilter = restaurants.map((restaurant, index) => {
+const restaurantsListNoFilter = restaurants.map((restaurant, index) => {
     return (
       <ContainerRest key={index} onClick={() => navigate()}>
         <img src={restaurant.logoUrl} />
