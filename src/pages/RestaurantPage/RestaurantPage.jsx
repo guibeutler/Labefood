@@ -5,6 +5,7 @@ import CardRestaurantDetail from '../../components/CardRestaurantDetail/CardRest
 import CardProduct from '../../components/CardProduct/CardProduct';
 import { Container, ContainerProdutos, Separator, BoxProdutos, CategoryTitle } from './styled';
 import Loader from '../../components/Loader/Loader';
+import Header from '../../components/Header/Header';
 
 export default function RestaurantPage() {
 
@@ -13,6 +14,8 @@ export default function RestaurantPage() {
 
 
   return (
+    <>
+    <Header button={true} text="Restaurante"/>
     <Container>
         {isLoading ? <Loader/> : (
             <>
@@ -60,5 +63,6 @@ export default function RestaurantPage() {
             </>
         )}
     </Container>
+    </>
   )
 }
