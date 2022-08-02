@@ -1,7 +1,7 @@
 import {Container,UserData,UserAddress,Edit,Address,Text,EditAdd} from './style'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import {BASE_URL} from '../../constants/BASE_URL'
+import {BASE_URL,token} from '../../constants/BASE_URL'
 import {MdOutlineModeEdit} from 'react-icons/md'
 
 
@@ -9,11 +9,7 @@ import {MdOutlineModeEdit} from 'react-icons/md'
 export default function ProfilePage() {
     const [user,SetUser] = useState()
     const [address,setAddres] = useState()
-    const token = {
-        headers:{
-            auth:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImpiVDUzTThOQ1hjVGNoaXRiMUF5IiwibmFtZSI6IkxvcnJhbiIsImVtYWlsIjoibG9ycmFuQG91dGxvb2suY29tIiwiY3BmIjoiMTIzLjk4Ny40NTYtNjUiLCJoYXNBZGRyZXNzIjp0cnVlLCJhZGRyZXNzIjoiUi4gQWZvbnNvIEJyYXosIDE3NywgNzEgLSBWaWxhIE4uIENvbmNlacOnw6NvIiwiaWF0IjoxNjU5MzgwMjg0fQ.Pq7MJ8BJsub_nfjnATCzkZMVX8qdAFPpFtRnDxM_YGg"
-        }
-    } 
+
     const getProfile = () => {
         axios.get(`${BASE_URL}profile`,token)
         .then((res) => { 

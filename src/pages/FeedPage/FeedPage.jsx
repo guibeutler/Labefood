@@ -53,6 +53,37 @@ export default function FeedPage() {
     setCategory(item);
   };
 
+  const restaurantsList = restaurants
+    .filter((item) => item.category === category)
+    .map((restaurant, index) => {
+      return (
+        <ContainerRest key={index}>
+          <img src={restaurant.logoUrl} />
+          <h3>{restaurant.name}</h3>
+          <Info>
+            <p>
+              {restaurant.deliveryTime} - {restaurant.deliveryTime + 10} min
+            </p>
+            <p>Frete: R$ {restaurant.shipping},00</p>
+          </Info>
+        </ContainerRest>
+      );
+    });
+const restaurantsListNoFilter = restaurants.map((restaurant, index) => {
+    return (
+      <ContainerRest key={index} onClick={() => navigate()}>
+        <img src={restaurant.logoUrl} />
+        <h3>{restaurant.name}</h3>
+        <Info>
+          <p>
+            {restaurant.deliveryTime} - {restaurant.deliveryTime + 10} min
+          </p>
+          <p>Frete: R$ {restaurant.shipping},00</p>
+        </Info>
+      </ContainerRest>
+    );
+  });
+
   // Lista de restaurantes com filtro //
   const restaurantsList =
     states.restaurants &&
@@ -72,6 +103,7 @@ export default function FeedPage() {
           </ContainerRest>
         );
       });
+
 
   const categoryList = states.restaurants.map((item, index) => {
     return (
