@@ -14,16 +14,19 @@ function CardProduct(props) {
         setters.setCartShop([...states.cartShop, {
             RestaurantId: props.RestaurantId, 
             ProductId: props.id, 
-            Name: props.name, 
-            quantity: quantity}
+            Name: props.name,
+            Price: props.price,
+            Image: props.image, 
+            Quantity: quantity,
+        }
         ]);}
     }
 
     const removeFromCart = () => {
             states.cartShop.filter(item => item.ProductId === props.id)
-            .forEach(item => {item.quantity === 1 
+            .forEach(item => {item.Quantity === 1 
                 ? setters.setCartShop(states.cartShop.filter(item => item.ProductId !== props.id)) 
-                : setters.setCartShop(states.cartShop.map(item => item.ProductId === props.id ? {...item, quantity: item.quantity - 1} : item))});
+                : setters.setCartShop(states.cartShop.map(item => item.ProductId === props.id ? {...item, Quantity: item.Quantity - 1} : item))});
     }
 
   return (
@@ -36,12 +39,12 @@ function CardProduct(props) {
       <div>
         <p>{props.name}</p>
         <p>{props.description}</p>
-        <p>{props.price}</p>
+        <p>R${props.price.toFixed(2).toString().replace(".", ",")}</p>
       </div>
       {states.cartShop.some(product => product.ProductId === props.id) 
       ? <>
       <CartItems>
-        <p>{states.cartShop.filter(product => product.ProductId === props.id).map(product => product.quantity)}</p>
+        <p>{states.cartShop.filter(product => product.ProductId === props.id).map(product => product.Quantity)}</p>
       </CartItems>
       <Button onClick={removeFromCart}>Remover</Button> 
       </>
