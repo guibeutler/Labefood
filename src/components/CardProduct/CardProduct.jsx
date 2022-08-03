@@ -44,7 +44,15 @@ function CardProduct(props) {
 
   return (
     <>
-    <PopUpProductQt popUp={popUp} setPopUp={setPopUp} setQuantity={setQuantity} quantity={quantity} addToCart={addToCart}/>
+    <PopUpProductQt 
+        popUp={popUp} 
+        setPopUp={setPopUp} 
+        setQuantity={setQuantity} 
+        quantity={quantity} 
+        addToCart={addToCart}
+        cartShop={states.cartShop}
+        RestaurantId={props.RestaurantId}
+      />
     <Container>
       <BoxImage>
         <ProductImage src={props.image} alt={props.name} />

@@ -45,7 +45,7 @@ export const Title = styled.h1`
     margin-bottom: 31px;
 `
 
-export const Button = styled.button`
+export const ButtonAdd = styled.button`
     background: none;
     border: none;
     align-self: flex-end;
@@ -53,5 +53,26 @@ export const Button = styled.button`
     margin-top: 40px;
     padding: 10px 0;
     text-transform: uppercase;
-    color: #4a90e2;
+    color: ${props => props.theme.colors.darkPeach};
+    font-weight: 600;
+`
+
+export const Message = styled.p`
+    text-align: center;
+`
+
+
+
+export const BoxButtons = styled.div`
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    gap: 20px;
+`
+
+export const ButtonAlert = styled.button`
+    width: 115px;
+    padding: 10px 4px;
+    background-color: ${props => props.theme.colors.darkPeach};
+    border: none;
 `

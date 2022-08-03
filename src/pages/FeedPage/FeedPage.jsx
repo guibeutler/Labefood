@@ -14,6 +14,7 @@ import {
   Button,
   Category,
   ContainerLoader,
+  Search,
 } from "./style";
 import CardRestaurantFeed from "../../components/CardRestaurantFeed/CardRestaurantFeed";
 import CardFilterFeed from "../../components/CardFilterFeed/CardFilterFeed";
@@ -115,9 +116,7 @@ export default function FeedPage() {
         </Button>
       </CategoryNavBar>
 
-      {category ? (
-
-
+      
       {!states.loaderCard ? (
         <ContainerLoader>
           {list.map((item, index) => {
