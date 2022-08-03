@@ -12,6 +12,7 @@ import { SearchPage } from '../pages/SearchPage/SearchPage';
 import RestaurantPage from '../pages/RestaurantPage/RestaurantPage';
 
 const Router = () => {
+
   return (
     <BrowserRouter>
       <Routes>
@@ -35,5 +36,6 @@ const Router = () => {
     </BrowserRouter>
   );
 };
+
 
 export default Router;

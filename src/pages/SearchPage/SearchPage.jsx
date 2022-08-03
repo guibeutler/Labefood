@@ -3,7 +3,9 @@ import axios from "axios"
 import { BASE_URL,token } from "../../constants/BASE_URL"
 import { TextField,InputAdornment } from "@mui/material"
 import {BsSearch} from 'react-icons/bs'
-import {Search,Text} from './Styled'
+import {Search,Text,Container,Card} from './Styled'
+import {CardRestaurant} from '../../components/CardRestaurant/CardRestaurant'
+
 
 export const SearchPage = () =>{
     const[restaurants,setRestaurants] = useState([])
@@ -30,22 +32,26 @@ const mapRestaurants = restaurants?.filter((restaurant) => {
 
 const listRestaurants = mapRestaurants?.map((restaurant) => {
     return(
-        <div>
-            <p key={restaurant.id}>{restaurant.name}</p>
-        </div>
+        <CardRestaurant
+        id={restaurant.id}
+        name={restaurant.name}
+        logoUrl={restaurant.logoUrl}
+        deliveryTime={restaurant.deliveryTime}
+        shipping={restaurant.shipping}
+        button={""}
+        />
     )
 })
 
     return (
-        <div>
-
+        <Container>
             <Search>
                 <TextField
                 id="input-with-icon-textfield"
                 label="Busca"
                 onChange={handleChange}
                 value={value}
-                placeholder={"restaurantes"}
+                placeholder={"Restaurantes"}
                 InputProps={{
                 startAdornment: (
                     <InputAdornment position="start">
@@ -55,11 +61,10 @@ const listRestaurants = mapRestaurants?.map((restaurant) => {
                 }}
                 variant="outlined"
                         />
-                        <Text>Busque por nome de restaurantes</Text>
+                       
             </Search>
+            {value === "" ? <Text> Busque por nome de restaurante</Text> : mapRestaurants.length ? <Card> {listRestaurants}</Card>: <Text> Não encontramos </Text>} 
 
-
-             {listRestaurants}
-        </div>
+        </Container>
     )
 }
