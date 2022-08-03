@@ -4,7 +4,6 @@ import { useContext, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { Radio, RadioGroup, FormControlLabel, FormControl } from '@mui/material'
 import 'react-toastify/dist/ReactToastify.css';
-import OrderActive from './OrderActive';
 import GlobalContext from '../../context/GlobalContext';
 import useRequestData from '../../hooks/useRequestData';
 import Swal from 'sweetalert2';
@@ -217,14 +216,6 @@ export default function ShoppingCartPage() {
                     <p><b>Carrinho Vazio ;B</b></p>
                 </div>
             )}
-            {getActiveOrder.order &&
-                (<OrderActive
-                    restaurantName={getActiveOrder.order.restaurantName}
-                    totalPrice={getActiveOrder.order.totalPrice}
-                />)
-            }
         </ContainerMain>
-
-
     )
 }

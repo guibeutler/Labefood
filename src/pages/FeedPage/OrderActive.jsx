@@ -1,6 +1,6 @@
 import React from "react";
 import { MdAccessTime } from 'react-icons/md'
-import { OrderBox, OrderInfo } from './styled'
+import { OrderBox, OrderInfo } from './style'
 
 export default function OrderActive(props) {
 
