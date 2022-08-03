@@ -3,6 +3,8 @@ import { BASE_URL, token } from '../../constants/BASE_URL'
 import { useContext, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { Radio, RadioGroup, FormControlLabel, FormControl } from '@mui/material'
+import 'react-toastify/dist/ReactToastify.css';
+import OrderActive from './OrderActive';
 import GlobalContext from '../../context/GlobalContext';
 import useRequestData from '../../hooks/useRequestData';
 import Swal from 'sweetalert2';
@@ -44,7 +46,7 @@ export default function ShoppingCartPage() {
     }
 
     const removeItemCart = (itemToRemove) => {
-        const index = states.cartShop.findIndex((i) => i.id === itemToRemove.id)
+        const index = states.cartShop.findIndex((i) => i.ProductId === itemToRemove.ProductId)
         const newCart = [...states.cartShop]
 
         if (newCart[index].Quantity === 1) {
@@ -150,7 +152,7 @@ export default function ShoppingCartPage() {
     })
 
     return (
-        <ContainerMain>
+        <ContainerMain margin={getActiveOrder.order ? true : false}>
             <ToastContainer position='top-center' autoClose={2000} />
             <h3>Meu Carrinho</h3>
             <HeaderContainer>
@@ -169,6 +171,8 @@ export default function ShoppingCartPage() {
 
                     </RestaurantContainer>
                     {renderCart}
+
+
                     <Shipping>
                         <h4>Frete R${details && details.shipping},00</h4>
                     </Shipping>
@@ -186,6 +190,7 @@ export default function ShoppingCartPage() {
                             </RadioGroup>
                         </FormControl>
                     </DivPayment>
+
                     <div>
                         {
                             renderCart === false ?
@@ -212,6 +217,12 @@ export default function ShoppingCartPage() {
                     <p><b>Carrinho Vazio ;B</b></p>
                 </div>
             )}
+            {getActiveOrder.order &&
+                (<OrderActive
+                    restaurantName={getActiveOrder.order.restaurantName}
+                    totalPrice={getActiveOrder.order.totalPrice}
+                />)
+            }
         </ContainerMain>
 
 

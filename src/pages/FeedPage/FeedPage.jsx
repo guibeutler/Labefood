@@ -20,7 +20,7 @@ export default function FeedPage() {
 
   const getRestaurants = () => {
     axios
-      .get(`${BASE_URL}restaurants`, {
+      .get(`${BASE_URL}/restaurants`, {
         headers: {
           auth: localStorage.getItem('token'),
         },

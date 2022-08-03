@@ -5,6 +5,7 @@ export const ContainerMain = styled.div`
     flex-direction: column;
     align-items: center;
     gap: 16px;
+    margin-bottom: ${props => props.margin ? '120px' : '0'};
 `
 
 export const HeaderContainer = styled.div`
@@ -152,6 +153,38 @@ export const ButtonTwo = styled.button`
     border: none;
     margin-bottom: 15px;
 `
+
+export const OrderBox = styled.div`
+    display: flex;
+    width: 100vw;
+    height: 125px;
+    background-color: #e86e5a;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    bottom: 0;   
+`
+
+export const OrderInfo = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    h4 {
+        color: #ffffff
+    }
+    p {
+        margin: 4.5px;
+        font-size: 18px;
+        color: #000000;
+    }
+    span {
+        font-weight: bolder;
+        color: #000000;
+    }
+`
+
 
 
 
