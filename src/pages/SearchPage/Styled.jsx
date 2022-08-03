@@ -13,7 +13,7 @@ export const Search = styled.div`
     align-items: center;
     
     input{
-        width: 300px;
+        width: 80vw;
         
     }
 `

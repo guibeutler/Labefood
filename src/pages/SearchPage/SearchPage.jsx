@@ -5,6 +5,7 @@ import { TextField,InputAdornment } from "@mui/material"
 import {BsSearch} from 'react-icons/bs'
 import {Search,Text,Container,Card} from './Styled'
 import {CardRestaurant} from '../../components/CardRestaurant/CardRestaurant'
+import Header from '../../components/Header/Header'
 
 
 export const SearchPage = () =>{
@@ -42,9 +43,9 @@ const listRestaurants = mapRestaurants?.map((restaurant) => {
         />
     )
 })
-
     return (
         <Container>
+            <Header text={"Busca"} button={true}/>
             <Search>
                 <TextField
                 id="input-with-icon-textfield"

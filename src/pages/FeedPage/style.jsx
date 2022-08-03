@@ -61,6 +61,13 @@ export const CategoryNavBar = styled.nav`
   }
 `;
 
+export const Search = styled.div`
+    margin: 10px;
+    input{
+      width:80vw;
+    }
+`
+
 export const Button = styled.button`
   background-color: transparent;
   border: none;

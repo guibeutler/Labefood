@@ -5,6 +5,7 @@ import {BASE_URL,token} from '../../constants/BASE_URL'
 import {MdOutlineModeEdit} from 'react-icons/md'
 import { goToAddress, goToSignUp } from '../../routes/Coordinator'
 import {useNavigate} from 'react-router-dom'
+import Header from '../../components/Header/Header'
 
 
 export default function ProfilePage() {
@@ -34,13 +35,10 @@ export default function ProfilePage() {
         .catch((err) => alert(err))
     }
 
-
-
    useEffect(()=>{
   getProfile()
   getFullAddress()
   ordersHistory()
-    
    },[])
 
    function dataAtualFormatada(){
@@ -54,21 +52,19 @@ export default function ProfilePage() {
    
    const listOrder = order && order.map((item,index)=>{
     return( 
-        <Purchases>
-            <h3>Histórico de pedidos</h3>
-            <Line></Line>
+      
         <Card key={index}>
             <Title>{item.restaurantName}</Title>
             <DateProduct>{dataAtualFormatada()}</DateProduct>
-            <Price>SUBTOTAL R${item.totalPricerice}</Price>
+            <Price>SUBTOTAL R${item.totalPrice}</Price>
         </Card>
-        </Purchases> 
-        
+          
     )
    })
 
-
     return(
+        <>
+        <Header text={"Perfil"} button={true}/>
         <Container>
          <UserData>
              <Edit><p>{user?.name}</p> <MdOutlineModeEdit size={"20px"}onClick={()=> goToSignUp(navigate)}/></Edit>
@@ -84,14 +80,14 @@ export default function ProfilePage() {
                 <p>{address?.neighbourhood}, {address?.street},  N° {address?.number}</p>  
             </Address>
          </UserAddress>
-         
-         
-            {listOrder?.length > 0 ? <div>{listOrder}</div> :
-            <Fail><h3>Você não possui pedidos</h3><Line></Line></Fail> }
-            
-           
+            {listOrder?.length > 0 ?  <Purchases>
+            <h3>Histórico de pedidos</h3>
+            <Line></Line>
+            {listOrder}
+            </Purchases> :
+            <Fail><h3>Você não possui pedidos</h3><Line></Line></Fail> } 
          </Container>
-
+         </>
      
     )
 }

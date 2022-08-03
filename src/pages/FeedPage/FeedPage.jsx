@@ -1,3 +1,9 @@
+
+import { TextField,InputAdornment } from "@mui/material"
+import {BsSearch} from 'react-icons/bs'
+import { goToSearch } from '../../routes/Coordinator';
+import { useNavigate } from 'react-router-dom';
+
 import React, { useEffect, useState, useRef, useContext } from "react";
 import axios from "axios";
 import { BASE_URL } from "../../constants/BASE_URL";
@@ -17,11 +23,16 @@ import GoToTop from "../../components/GoToTop/GoToTop";
 import LoaderCard from "../../components/LoaderCard/LoaderCard";
 import FooterNavigation from '../../components/Footer/Footer';
 
+
 export default function FeedPage() {
   const { states, setters } = useContext(GlobalContext);
   const [category, setCategory] = useState("");
   const categoryBar = useRef(null);
+
+  const navigate = useNavigate()
+
   const list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
 
   const getRestaurants = () => {
     axios
@@ -65,7 +76,22 @@ export default function FeedPage() {
 
   return (
     <Container>
-      <Header button={false} text={"Rappi4"} />
+
+      <Header button={false} text={'Rappi4'} />
+      <Search>
+      <TextField onClick={()=> goToSearch(navigate)}
+                label="Busca"
+                placeholder={"Restaurantes"}
+                InputProps={{
+                startAdornment: (
+                    <InputAdornment position="start">
+                    <BsSearch/>
+                    </InputAdornment>
+                ),
+                }}
+                variant="outlined"
+                        />
+      </Search>
 
       <CategoryNavBar>
         <Button onClick={handleLeftClick}>
@@ -89,6 +115,9 @@ export default function FeedPage() {
         </Button>
       </CategoryNavBar>
 
+      {category ? (
+
+
       {!states.loaderCard ? (
         <ContainerLoader>
           {list.map((item, index) => {
@@ -96,6 +125,7 @@ export default function FeedPage() {
           })}
         </ContainerLoader>
       ) : category ? (
+
         <CardFilterFeed category={category} />
       ) : (
         <CardRestaurantFeed />
