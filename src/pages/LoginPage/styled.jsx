@@ -15,3 +15,11 @@ export const Form = styled.form`
   width: 80vw;
   max-width: 400px;
 `
+
+export const ButtonSignup = styled.button`
+  border: none;
+  background-color: transparent;
+  font-size: 16px;
+  padding: 12px 16px;
+  margin-top: 8px;
+`
