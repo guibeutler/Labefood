@@ -1,7 +1,16 @@
-import React from 'react'
+import React from "react";
+import {useProtectedPage} from '../../hooks/UseUnProtectPage'
+import {ScreenContainer, LogoImage} from "./styled";
+import logo from "../../assets/img/logo-future-eats.svg";
+import AddressForm from "./AdressForm";
 
 export default function AddressRegistrationPage () {
-    return(
-        <div>Address Registration Page</div>
-    )
-}
+    // useProtectedPage()  
+
+    return (
+    <ScreenContainer>
+        <LogoImage src={logo}/>
+        <AddressForm/>
+    </ScreenContainer>
+  );
+};
