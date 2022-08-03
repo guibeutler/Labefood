@@ -5,7 +5,7 @@ export const Container = styled.div`
 `;
 
 export const Card = styled.div`
-  width: 80%;
+  width: 80vw;
   margin: 8px auto;
 `;
 

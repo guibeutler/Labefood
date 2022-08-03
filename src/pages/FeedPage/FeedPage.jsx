@@ -78,7 +78,7 @@ export default function FeedPage() {
           <MdKeyboardArrowRight size={'32px'} />
         </Button>
       </CategoryNavBar>
-      {states.loaderCard === true
+      {!states.loaderCard === true
         ? list.map((item, index) => {
             return <LoaderCard key={index} />;
           })
