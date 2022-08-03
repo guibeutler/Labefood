@@ -8,11 +8,13 @@ import CardFilterFeed from '../../components/CardFilterFeed/CardFilterFeed';
 import GlobalContext from '../../context/GlobalContext';
 import Header from '../../components/Header/Header';
 import GoToTop from '../../components/GoToTop/GoToTop';
+import LoaderCard from '../../components/LoaderCard/LoaderCard';
 
 export default function FeedPage() {
   const { states, setters } = useContext(GlobalContext);
   const [category, setCategory] = useState('');
   const categoryBar = useRef(null);
+  const list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   const getRestaurants = () => {
     axios
@@ -23,6 +25,7 @@ export default function FeedPage() {
       })
       .then((res) => {
         setters.setRestaurants(res.data.restaurants);
+        setters.setLoaderCard(true);
       })
       .catch((err) => console.log(err));
   };
@@ -43,7 +46,10 @@ export default function FeedPage() {
   const categoryList = states.restaurants.map((item, index) => {
     return (
       <li key={index}>
-        <Category selected={category === item.category} onClick={() => setCategory(item.category)}>
+        <Category
+          selected={category === item.category}
+          onClick={() => setCategory(item.category)}
+        >
           {item.category}
         </Category>
       </li>
@@ -59,7 +65,12 @@ export default function FeedPage() {
         </Button>
         <ul ref={categoryBar}>
           <li>
-            <Category selected={category === ""} onClick={() => setCategory('')}>Todos</Category>
+            <Category
+              selected={category === ''}
+              onClick={() => setCategory('')}
+            >
+              Todos
+            </Category>
           </li>
           {categoryList}
         </ul>
@@ -67,6 +78,11 @@ export default function FeedPage() {
           <MdKeyboardArrowRight size={'32px'} />
         </Button>
       </CategoryNavBar>
+      {!states.loaderCard === true
+        ? list.map((item, index) => {
+            return <LoaderCard key={index} />;
+          })
+        : null}
       {category ? (
         <CardFilterFeed category={category} />
       ) : (

@@ -3,6 +3,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 
 export default function GlobalProvider({ children }) {
   const [restaurants, setRestaurants] = useState([]);
+  const [loaderCard, setLoaderCard] = useState(false);
 
   const [cartShop, setCartShop] = useState(
     localStorage.getItem('cartShop')
@@ -18,8 +19,8 @@ export default function GlobalProvider({ children }) {
     changeLocalStorageCartShop();
   }, [changeLocalStorageCartShop]);
 
-  const states = { cartShop, restaurants };
-  const setters = { setCartShop, setRestaurants };
+  const states = { cartShop, restaurants, loaderCard };
+  const setters = { setCartShop, setRestaurants, setLoaderCard };
   const data = { states, setters };
 
   return (
