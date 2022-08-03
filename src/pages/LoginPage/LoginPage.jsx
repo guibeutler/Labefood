@@ -14,7 +14,6 @@ export default function LoginPage() {
 
   const onSubmitForm = (event) => {
     event.preventDefault();
-
     axios.post(`${BASE_URL}/login`, form)
     .then((res) => {
         localStorage.setItem('token', res.data.token);
