@@ -2,17 +2,22 @@ import React, { useEffect, useState, useRef, useContext } from 'react';
 import axios from 'axios';
 import { BASE_URL } from '../../constants/BASE_URL';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
-import { Container, CategoryNavBar, Button, Category } from './style';
+import { Container, CategoryNavBar, Button, Category,Search } from './style';
 import CardRestaurantFeed from '../../components/CardRestaurantFeed/CardRestaurantFeed';
 import CardFilterFeed from '../../components/CardFilterFeed/CardFilterFeed';
 import GlobalContext from '../../context/GlobalContext';
 import Header from '../../components/Header/Header';
 import GoToTop from '../../components/GoToTop/GoToTop';
+import { TextField,InputAdornment } from "@mui/material"
+import {BsSearch} from 'react-icons/bs'
+import { goToSearch } from '../../routes/Coordinator';
+import { useNavigate } from 'react-router-dom';
 
 export default function FeedPage() {
   const { states, setters } = useContext(GlobalContext);
   const [category, setCategory] = useState('');
   const categoryBar = useRef(null);
+  const navigate = useNavigate()
 
   const getRestaurants = () => {
     axios
@@ -53,6 +58,20 @@ export default function FeedPage() {
   return (
     <Container>
       <Header button={false} text={'Rappi4'} />
+      <Search>
+      <TextField onClick={()=> goToSearch(navigate)}
+                label="Busca"
+                placeholder={"Restaurantes"}
+                InputProps={{
+                startAdornment: (
+                    <InputAdornment position="start">
+                    <BsSearch/>
+                    </InputAdornment>
+                ),
+                }}
+                variant="outlined"
+                        />
+      </Search>
       <CategoryNavBar>
         <Button onClick={handleLeftClick}>
           <MdKeyboardArrowLeft size={'32px'} />
@@ -67,6 +86,7 @@ export default function FeedPage() {
           <MdKeyboardArrowRight size={'32px'} />
         </Button>
       </CategoryNavBar>
+     
       {category ? (
         <CardFilterFeed category={category} />
       ) : (

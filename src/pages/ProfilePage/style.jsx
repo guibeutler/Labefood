@@ -63,6 +63,8 @@ export const Purchases = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap:8px;
+  margin-top: 5px;
 `;
 export const Line = styled.div`
   background-color: black;
