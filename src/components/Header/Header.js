@@ -9,10 +9,10 @@ const Header = (props) => {
     <Container>
       {props.button ? (
         <Button onClick={() => goToBack(navigate)}>
-          <MdKeyboardArrowLeft size={'32px'} />
+          <MdKeyboardArrowLeft size={'30px'} />
         </Button>
       ) : null}
-      <h1>{props.text}</h1>
+      <h3>{props.text}</h3>
     </Container>
   );
 };

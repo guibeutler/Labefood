@@ -5,7 +5,8 @@ export const ContainerMain = styled.div`
     flex-direction: column;
     align-items: center;
     gap: 16px;
-    margin-bottom: ${props => props.margin ? '120px' : '0'};
+    /* margin-bottom: ${props => props.margin ? '120px' : '0'}; */
+    margin-bottom: 80px;
 `
 
 export const HeaderContainer = styled.div`
@@ -17,6 +18,7 @@ export const HeaderContainer = styled.div`
     color: #b8b8b8;
     min-width: 100%;
     height: 76px;
+    margin-top: -20px;
 
     p {
         margin-left: 10px;
@@ -182,6 +184,17 @@ export const OrderInfo = styled.div`
     span {
         font-weight: bolder;
         color: #000000;
+    }
+`
+export const EmptyCar = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 100vw;
+    margin-top: 20vh;
+
+    h4 {
+        margin-left: 10px;
     }
 `
 

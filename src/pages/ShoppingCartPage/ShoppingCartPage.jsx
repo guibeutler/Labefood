@@ -8,9 +8,24 @@ import GlobalContext from '../../context/GlobalContext';
 import useRequestData from '../../hooks/useRequestData';
 import Swal from 'sweetalert2';
 import axios from 'axios'
-import { ContainerMain, ButtonTwo, DivPayment, DivValue, Shipping, HeaderContainer, RestaurantContainer, CardContainer, Container, Description, BoxImage, ProductImage, CartItems, Button } from './styled'
-
-
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer'
+import { 
+    RestaurantContainer, 
+    HeaderContainer, 
+    ContainerMain, 
+    ProductImage, 
+    Description, 
+    DivPayment, 
+    Container,
+    ButtonTwo, 
+    CartItems, 
+    EmptyCar,
+    DivValue, 
+    Shipping,
+    BoxImage,
+    Button 
+} from './styled'
 
 export default function ShoppingCartPage() {
     const { states, setters } = useContext(GlobalContext);
@@ -21,7 +36,8 @@ export default function ShoppingCartPage() {
     const [count, setCount] = useState(0)
     const getAddress = useRequestData([], `${BASE_URL}/profile/address`)
     const getActiveOrder = useRequestData({}, `${BASE_URL}/active-order`)
-    const details = states.cartShop.length > 0 && states?.cartShop[0].RestaurantDetails
+    const details = states.cartShop.length > 0 && states?.cartShop[0].RestaurantDetails    
+    const timeOrder = details && details.deliveryTime * 60 * 1000
     const address = getAddress.address
     const notify = () => toast.error('Removido')
 
@@ -33,7 +49,6 @@ export default function ShoppingCartPage() {
         onChangeValue()
     }, [states.cartShop])
 
-    const timeOrder = details && details.deliveryTime * 60 * 1000
 
     const onChangeValue = () => {
         let priceToPay = 0
@@ -151,71 +166,92 @@ export default function ShoppingCartPage() {
     })
 
     return (
-        <ContainerMain margin={getActiveOrder.order ? true : false}>
-            <ToastContainer position='top-center' autoClose={2000} />
-            <h3>Meu Carrinho</h3>
-            <HeaderContainer>
-                <div>
-                    <p>Endereço de entrega</p>
-                    <h4><b>{address && address.street}, {address && address.number}</b></h4>
-                </div>
-            </HeaderContainer>
-
-            {states.cartShop.length > 0 ? (
-                <>
-                    <RestaurantContainer>
-                        <h4>{details && details.name}</h4>
-                        <p>{details && details.address}</p>
-                        <p>{details && details.deliveryTime - 10} - {details && details.deliveryTime} min</p>
-
-                    </RestaurantContainer>
-                    {renderCart}
-
-
-                    <Shipping>
-                        <h4>Frete R${details && details.shipping},00</h4>
-                    </Shipping>
-                    <DivValue>
-                        <h4>SUBTOTAL</h4>
-                        <h3>R$ {valueToPay.toFixed(2).toString().replace(".", ",")}</h3>
-                    </DivValue>
-                    <DivPayment>
-                        <p>Forma de pagamento</p>
-                        <hr />
-                        <FormControl component="fieldset">
-                            <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange}>
-                                <FormControlLabel value="money" control={<Radio />} label="Dinheiro" />
-                                <FormControlLabel value="creditcard" control={<Radio />} label="Cartão de Crédito" />
-                            </RadioGroup>
-                        </FormControl>
-                    </DivPayment>
-
+        <>
+            <Header button={true} text="Meu Carrinho" />
+            <ContainerMain margin={getActiveOrder.order ? true : false}>
+                <ToastContainer position='top-center' autoClose={1000} />
+                <HeaderContainer>
                     <div>
-                        {
-                            renderCart === false ?
-
-                                <ButtonTwo
-                                    variant='contained'
-                                    type='submit'
-                                >
-                                    <b>Confirmar</b>
-                                </ButtonTwo>
-                                :
-                                <ButtonTwo
-                                    variant='contained'
-                                    type='submit'
-                                    onClick={() => confirmPayment(details.id)}
-                                >
-                                    <b>Confirmar</b>
-                                </ButtonTwo>
-                        }
+                        <p>Endereço de entrega</p>
+                        <h4><b>{address && address.street}, {address && address.number}</b></h4>
                     </div>
-                </>
-            ) : (
-                <div>
-                    <p><b>Carrinho Vazio ;B</b></p>
-                </div>
-            )}
-        </ContainerMain>
+                </HeaderContainer>
+
+                {states.cartShop.length > 0 ? (
+                    <>
+                        <RestaurantContainer>
+                            <h4>{details && details.name}</h4>
+                            <p>{details && details.address}</p>
+                            <p>{details && details.deliveryTime - 10} - {details && details.deliveryTime} min</p>
+                        </RestaurantContainer>
+
+                        {renderCart}
+
+                        <Shipping>
+                            <h4>Frete R${details && details.shipping},00</h4>
+                        </Shipping>
+                        <DivValue>
+                            <h4>SUBTOTAL</h4>
+                            <h3>R$ {valueToPay.toFixed(2).toString().replace(".", ",")}</h3>
+                        </DivValue>
+                        <DivPayment>
+                            <p>Forma de pagamento</p>
+                            <hr />
+                            <FormControl component="fieldset">
+                                <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange}>
+                                    <FormControlLabel value="money" control={<Radio />} label="Dinheiro" />
+                                    <FormControlLabel value="creditcard" control={<Radio />} label="Cartão de Crédito" />
+                                </RadioGroup>
+                            </FormControl>
+                        </DivPayment>
+
+                        <div>
+                            {
+                                renderCart === false ?
+
+                                    <ButtonTwo
+                                        variant='contained'
+                                        type='submit'
+                                    >
+                                        <b>Confirmar</b>
+                                    </ButtonTwo>
+                                    :
+                                    <ButtonTwo
+                                        variant='contained'
+                                        type='submit'
+                                        onClick={() => confirmPayment(details.id)}
+                                    >
+                                        <b>Confirmar</b>
+                                    </ButtonTwo>
+                            }
+                        </div>
+                    </>
+                ) : (
+                    <>
+                        <p>Carrinho vazio</p>
+                        <EmptyCar>
+                            <Shipping>
+                                <h4>Frete R$ 0,00</h4>
+                            </Shipping>
+                            <DivValue>
+                                <h4>SUBTOTAL</h4>
+                                <h3>R$ 00,00</h3>
+                            </DivValue>
+                            <DivPayment>
+                                <p>Forma de pagamento</p>
+                                <hr />
+                                <FormControl component="fieldset">
+                                    <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange}>
+                                        <FormControlLabel value="money" control={<Radio />} label="Dinheiro" />
+                                        <FormControlLabel value="creditcard" control={<Radio />} label="Cartão de Crédito" />
+                                    </RadioGroup>
+                                </FormControl>
+                            </DivPayment>
+                        </EmptyCar>
+                    </>
+                )}
+                <Footer />
+            </ContainerMain>
+        </>
     )
 }
