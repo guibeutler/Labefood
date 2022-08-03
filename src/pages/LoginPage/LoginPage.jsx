@@ -20,20 +20,14 @@ export default function LoginPage() {
         goToFeed(navigate);
         console.log(form);
     })
-  };
 
-  //   const Login = (form, clean, navigate) => {
-  //     axios
-  //       .post(`${BASE_URL}/login`, form)
-  //       .then((res) => {
-  //         localStorage.setItem('token', res.data.token);
-  //         clean();
-  //         goToFeed(navigate);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   };
+    axios.post(`${BASE_URL}/login`, form).then((res) => {
+      localStorage.setItem('token', res.data.token);
+      goToFeed(navigate);
+      clean();
+    });
+
+  };
 
   return (
     <div>

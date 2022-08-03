@@ -1,6 +1,17 @@
 import { useContext, useState } from 'react';
 import GlobalContext from '../../context/GlobalContext';
-import { Container, BoxImage, ProductImage, CartItems, Button } from "./styled";
+import { 
+  Container, 
+  BoxImage, 
+  ProductImage, 
+  CartItems, 
+  ButtonRemove, 
+  ButtonAdd,
+  BoxInfos, 
+  ProductQuantity,
+  Title,
+  Description,
+  Price } from "./styled";
 import PopUpProductQt from '../../components/PopUpProductQt/PopUpProductQt';
 
 function CardProduct(props) {
@@ -38,19 +49,19 @@ function CardProduct(props) {
       <BoxImage>
         <ProductImage src={props.image} alt={props.name} />
       </BoxImage>
-      <div>
-        <p>{props.name}</p>
-        <p>{props.description}</p>
-        <p>R${props.price.toFixed(2).toString().replace(".", ",")}</p>
-      </div>
+      <BoxInfos>
+        <Title>{props.name}</Title>
+        <Description>{props.description}</Description>
+        <Price>R${props.price.toFixed(2).toString().replace(".", ",")}</Price>
+      </BoxInfos>
       {states.cartShop.some(product => product.ProductId === props.id) 
       ? <>
       <CartItems>
-        <p>{states.cartShop.filter(product => product.ProductId === props.id).map(product => product.Quantity)}</p>
+        <ProductQuantity>{states.cartShop.filter(product => product.ProductId === props.id).map(product => product.Quantity)}</ProductQuantity>
       </CartItems>
-      <Button onClick={removeFromCart}>Remover</Button> 
+      <ButtonRemove onClick={removeFromCart}>Remover</ButtonRemove> 
       </>
-      : <Button onClick={() => setPopUp(true)} >Adicionar</Button>}
+      : <ButtonAdd onClick={() => setPopUp(true)} >Adicionar</ButtonAdd>}
       
     </Container>
     </>

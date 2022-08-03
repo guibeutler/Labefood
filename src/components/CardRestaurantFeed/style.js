@@ -1,0 +1,45 @@
+import styled from 'styled-components';
+
+export const ContainerRest = styled.div`
+  width: 90vw;
+  max-width: 400px;
+  height: 200px;
+  border-radius: 8px;
+  border-left: 1px solid #9c9c9c;
+  border-right: 1px solid #9c9c9c;
+  border-bottom: 1px solid #9c9c9c;
+  margin-bottom: 16px;
+  cursor: pointer;
+  h3 {
+    padding-left: 16px;
+    color: ${(props) => props.theme.colors.darkPeach};
+  }
+  img {
+    width: 100%;
+    height: 70%;
+    object-fit: cover;
+    border-radius: 8px 8px 0px 0px;
+  }
+`;
+
+export const Info = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 16px;
+  color: #9c9c9c;
+`;
+
+export const Container = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @media (min-width: 800px) {
+    flex-direction: row;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    max-width: 1400px;
+  }
+`;

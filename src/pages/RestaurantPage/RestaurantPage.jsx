@@ -3,6 +3,9 @@ import { useRestaurantDetails } from '../../hooks/useRestaurantDetails';
 import { useParams } from 'react-router-dom';
 import CardRestaurantDetail from '../../components/CardRestaurantDetail/CardRestaurantDetail';
 import CardProduct from '../../components/CardProduct/CardProduct';
+import { Container, ContainerProdutos, Separator, BoxProdutos, CategoryTitle } from './styled';
+import Loader from '../../components/Loader/Loader';
+import Header from '../../components/Header/Header';
 
 export default function RestaurantPage() {
 
@@ -11,8 +14,10 @@ export default function RestaurantPage() {
 
 
   return (
-    <div style={{margin: "12px"}}>
-        {isLoading ? <p>Loading...</p> : (
+    <>
+    <Header button={true} text="Restaurante"/>
+    <Container>
+        {isLoading ? <Loader/> : (
             <>
             <div>
                 <CardRestaurantDetail 
@@ -51,8 +56,39 @@ export default function RestaurantPage() {
                 )
             })}
 
+            <ContainerProdutos>
+
+                {categorys.map((category, i) => {
+                    return (
+                        <div key={i}>
+                            <CategoryTitle>{category}</CategoryTitle> 
+                            <Separator />
+                                <BoxProdutos>
+                                    {restaurant.products.filter(product => {
+                                        return product.category === category
+                                    }).map(product => {
+                                        return (
+                                            <CardProduct 
+                                            key={product.id}
+                                            RestaurantId={id}
+                                            id={product.id}
+                                            image={product.photoUrl} 
+                                            name={product.name} 
+                                            description={product.description} 
+                                            price={product.price} 
+                                            /> 
+                                        )
+                                    })}
+                                </BoxProdutos>
+                        </div>
+                    )
+                })}
+
+            </ContainerProdutos>
+
             </>
         )}
-    </div>
+    </Container>
+    </>
   )
 }
