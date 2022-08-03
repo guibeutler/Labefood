@@ -4,7 +4,6 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
 `;
 
 export const ContainerRest = styled.div`
@@ -17,6 +16,7 @@ export const ContainerRest = styled.div`
   border-bottom: 1px solid #9c9c9c;
   h3 {
     padding-left: 16px;
+    color: ${(props) => props.theme.colors.darkPeach};
   }
   img {
     width: 100%;
@@ -36,24 +36,28 @@ export const Info = styled.div`
 
 export const CategoryNavBar = styled.nav`
   width: 100vw;
-  max-width: 400px;
   display: flex;
   text-align: center;
   align-items: center;
-  background-color: #cdcdcd;
   justify-content: center;
+  margin-bottom: 16px;
   ul {
     list-style: none;
     width: 90vw;
     display: flex;
     overflow-x: auto;
-    scroll-behavior: smooth;
     gap: 10px;
     font-weight: bold;
     padding: 8px 0px;
   }
   ul::-webkit-scrollbar {
     display: none;
+  }
+  @media (min-width: 800px) {
+    width: 60vw;
+    li {
+      margin: 0px auto;
+    }
   }
 `;
 
@@ -69,7 +73,9 @@ export const Category = styled.button`
   background-color: transparent;
   border: none;
   font-weight: bold;
+  color: ${(props) =>
+    props.selected ? props.theme.colors.darkPeach : '#000000'};
   :hover {
-    color: orange;
+    color: ${(props) => props.theme.colors.darkPeach};
   }
 `;

@@ -2,22 +2,14 @@ import React, { useEffect, useState, useRef, useContext } from 'react';
 import axios from 'axios';
 import { BASE_URL } from '../../constants/BASE_URL';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
-import {
-  Container,
-  ContainerRest,
-  Info,
-  CategoryNavBar,
-  Button,
-  Category,
-} from './style';
-import { useNavigate } from 'react-router-dom';
+import { Container, CategoryNavBar, Button, Category } from './style';
 import CardRestaurantFeed from '../../components/CardRestaurantFeed/CardRestaurantFeed';
 import CardFilterFeed from '../../components/CardFilterFeed/CardFilterFeed';
 import GlobalContext from '../../context/GlobalContext';
+import Header from '../../components/Header/Header';
+import GoToTop from '../../components/GoToTop/GoToTop';
 
 export default function FeedPage() {
-  const navigate = useNavigate();
-  // const [restaurants, setRestaurants] = useState([]);
   const { states, setters } = useContext(GlobalContext);
   const [category, setCategory] = useState('');
   const categoryBar = useRef(null);
@@ -30,7 +22,6 @@ export default function FeedPage() {
         },
       })
       .then((res) => {
-        // console.log(res.data.restaurants);
         setters.setRestaurants(res.data.restaurants);
       })
       .catch((err) => console.log(err));
@@ -52,7 +43,7 @@ export default function FeedPage() {
   const categoryList = states.restaurants.map((item, index) => {
     return (
       <li key={index}>
-        <Category onClick={() => setCategory(item.category)}>
+        <Category selected={category === item.category} onClick={() => setCategory(item.category)}>
           {item.category}
         </Category>
       </li>
@@ -61,13 +52,14 @@ export default function FeedPage() {
 
   return (
     <Container>
+      <Header button={false} text={'Rappi4'} />
       <CategoryNavBar>
         <Button onClick={handleLeftClick}>
           <MdKeyboardArrowLeft size={'32px'} />
         </Button>
         <ul ref={categoryBar}>
           <li>
-            <Category onClick={() => setCategory('')}>Todos</Category>
+            <Category selected={category === ""} onClick={() => setCategory('')}>Todos</Category>
           </li>
           {categoryList}
         </ul>
@@ -80,6 +72,7 @@ export default function FeedPage() {
       ) : (
         <CardRestaurantFeed />
       )}
+      <GoToTop />
     </Container>
   );
 }
