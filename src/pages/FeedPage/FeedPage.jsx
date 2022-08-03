@@ -119,8 +119,6 @@ export default function FeedPage() {
         </Button>
       </CategoryNavBar>
 
-
-
       {!states.loaderCard ? (
         <ContainerLoader>
           {list.map((item, index) => {
