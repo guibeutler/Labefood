@@ -30,6 +30,32 @@ export default function RestaurantPage() {
                 />
             </div>
 
+            {categorys.map((category, i) => {
+                return (
+                    <div key={i}>
+                        <h1>{category}</h1> 
+                            <div>
+                                {restaurant.products.filter(product => {
+                                    return product.category === category
+                                }).map(product => {
+                                    return (
+                                        <CardProduct 
+                                        key={product.id}
+                                        RestaurantId={id}
+                                        id={product.id}
+                                        image={product.photoUrl} 
+                                        name={product.name} 
+                                        description={product.description} 
+                                        price={product.price}
+                                        details ={restaurant}
+                                        /> 
+                                    )
+                                })}
+                            </div>
+                    </div>
+                )
+            })}
+
             <ContainerProdutos>
 
                 {categorys.map((category, i) => {

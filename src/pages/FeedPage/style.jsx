@@ -86,3 +86,16 @@ export const Category = styled.button`
     color: ${(props) => props.theme.colors.darkPeach};
   }
 `;
+
+export const ContainerLoader = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+
+  @media (max-width: 800px) {
+    flex-direction: column;
+    width: 100%;
+  }
+
+`

@@ -29,6 +29,8 @@ function CardProduct(props) {
             Price: props.price,
             Image: props.image, 
             Quantity: quantity,
+            RestaurantDetails: props.details,
+            Description: props.description
         }
         ]);}
     }
