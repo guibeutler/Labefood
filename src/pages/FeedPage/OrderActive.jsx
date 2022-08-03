@@ -6,7 +6,7 @@ export default function OrderActive(props) {
 
     return (
         <OrderBox>
-            <MdAccessTime style={{ fontSize: 50 }} />
+            <MdAccessTime style={{ fontSize: 50 }} color={'#ffffff'}/>
             <OrderInfo>
                 <h4><b>Pedido em andamento</b></h4>
                 <p>{props.restaurantName}</p>

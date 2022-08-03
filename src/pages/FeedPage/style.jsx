@@ -4,6 +4,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: ${props => props.margin ? '185px' : '58px'}
 `;
 
 export const ContainerRest = styled.div`
@@ -104,23 +105,22 @@ export const OrderBox = styled.div`
     width: 100vw;
     height: 125px;
     background-color: #e86e5a;
-    display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
     position: fixed;
-    bottom: 0;   
+    bottom: 56px;   
 `
 
 export const OrderInfo = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    text-align: left;
+    gap: 5px;
+
     h4 {
         color: #ffffff
     }
     p {
-        margin: 4.5px;
         font-size: 18px;
         color: #000000;
     }

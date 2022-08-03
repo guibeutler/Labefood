@@ -79,7 +79,7 @@ export default function FeedPage() {
   });
 
   return (
-    <Container>
+    <Container margin={getActiveOrder.order ? true : false}>
 
       <Header button={false} text={'Rappi4'} />
       <Search>
