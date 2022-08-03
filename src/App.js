@@ -1,8 +1,8 @@
 import { GlobalStyle, Theme } from './assets/styles/GlobalStyle';
 import GlobalProvider from "./provider/GlobalProvider";
 import Router from './routes/Router';
-import { theme } from './constants/theme';
-import { ThemeProvider } from '@material-ui/styles';
+import {theme} from './constants/theme'
+import {ThemeProvider} from '@mui/material'
 
 function App() {
   return (
