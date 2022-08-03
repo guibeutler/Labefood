@@ -15,6 +15,7 @@ import GlobalContext from "../../context/GlobalContext";
 import Header from "../../components/Header/Header";
 import GoToTop from "../../components/GoToTop/GoToTop";
 import LoaderCard from "../../components/LoaderCard/LoaderCard";
+import FooterNavigation from '../../components/Footer/Footer';
 
 export default function FeedPage() {
   const { states, setters } = useContext(GlobalContext);
@@ -100,6 +101,7 @@ export default function FeedPage() {
         <CardRestaurantFeed />
       )}
       <GoToTop />
+      <FooterNavigation/>
     </Container>
   );
 }
