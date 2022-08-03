@@ -1,18 +1,24 @@
-import React, { useEffect, useState, useRef, useContext } from 'react';
-import axios from 'axios';
-import { BASE_URL } from '../../constants/BASE_URL';
-import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
-import { Container, CategoryNavBar, Button, Category } from './style';
-import CardRestaurantFeed from '../../components/CardRestaurantFeed/CardRestaurantFeed';
-import CardFilterFeed from '../../components/CardFilterFeed/CardFilterFeed';
-import GlobalContext from '../../context/GlobalContext';
-import Header from '../../components/Header/Header';
-import GoToTop from '../../components/GoToTop/GoToTop';
-import LoaderCard from '../../components/LoaderCard/LoaderCard';
+import React, { useEffect, useState, useRef, useContext } from "react";
+import axios from "axios";
+import { BASE_URL } from "../../constants/BASE_URL";
+import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
+import {
+  Container,
+  CategoryNavBar,
+  Button,
+  Category,
+  ContainerLoader,
+} from "./style";
+import CardRestaurantFeed from "../../components/CardRestaurantFeed/CardRestaurantFeed";
+import CardFilterFeed from "../../components/CardFilterFeed/CardFilterFeed";
+import GlobalContext from "../../context/GlobalContext";
+import Header from "../../components/Header/Header";
+import GoToTop from "../../components/GoToTop/GoToTop";
+import LoaderCard from "../../components/LoaderCard/LoaderCard";
 
 export default function FeedPage() {
   const { states, setters } = useContext(GlobalContext);
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState("");
   const categoryBar = useRef(null);
   const list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
@@ -20,7 +26,7 @@ export default function FeedPage() {
     axios
       .get(`${BASE_URL}/restaurants`, {
         headers: {
-          auth: localStorage.getItem('token'),
+          auth: localStorage.getItem("token"),
         },
       })
       .then((res) => {
@@ -58,32 +64,37 @@ export default function FeedPage() {
 
   return (
     <Container>
-      <Header button={false} text={'Rappi4'} />
+      <Header button={false} text={"Rappi4"} />
+
       <CategoryNavBar>
         <Button onClick={handleLeftClick}>
-          <MdKeyboardArrowLeft size={'32px'} />
+          <MdKeyboardArrowLeft size={"32px"} />
         </Button>
-        <ul ref={categoryBar}>
-          <li>
-            <Category
-              selected={category === ''}
-              onClick={() => setCategory('')}
-            >
-              Todos
-            </Category>
-          </li>
-          {categoryList}
-        </ul>
+        {states.loaderCard && (
+          <ul ref={categoryBar}>
+            <li>
+              <Category
+                selected={category === ""}
+                onClick={() => setCategory("")}
+              >
+                Todos
+              </Category>
+            </li>
+            {categoryList}
+          </ul>
+        )}
         <Button onClick={handleRightClick}>
-          <MdKeyboardArrowRight size={'32px'} />
+          <MdKeyboardArrowRight size={"32px"} />
         </Button>
       </CategoryNavBar>
-      {!states.loaderCard === true
-        ? list.map((item, index) => {
+
+      {!states.loaderCard ? (
+        <ContainerLoader>
+          {list.map((item, index) => {
             return <LoaderCard key={index} />;
-          })
-        : null}
-      {category ? (
+          })}
+        </ContainerLoader>
+      ) : category ? (
         <CardFilterFeed category={category} />
       ) : (
         <CardRestaurantFeed />
