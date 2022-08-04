@@ -3,6 +3,7 @@ import axios from "axios";
 
 const useRequestData = (initialData, url) => {
     const [data, setData] = useState(initialData)
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         axios
@@ -14,14 +15,15 @@ const useRequestData = (initialData, url) => {
                 })
             .then((res) => {
                 setData(res.data)
+                setLoading(false)
             })
             .catch((error) => {
-                alert('Não deu certo, tente novamente')
+                setLoading(false)
             })
 
     }, [url])
 
-    return (data)
+    return { data, loading }
 }
 
 export default useRequestData

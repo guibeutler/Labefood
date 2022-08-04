@@ -85,7 +85,7 @@ export default function FeedPage() {
   });
 
   return (
-    <Container margin={getActiveOrder.order ? true : false}>
+    <Container margin={getActiveOrder.data.order ? true : false}>
 
       <Header button={false} text={'Rappi4'} />
       <Search>
@@ -138,10 +138,10 @@ export default function FeedPage() {
         <CardRestaurantFeed />
       )}
       <GoToTop />
-      {getActiveOrder.order &&
+      {getActiveOrder.data.order &&
                 (<OrderActive
-                    restaurantName={getActiveOrder.order.restaurantName}
-                    totalPrice={getActiveOrder.order.totalPrice}
+                    restaurantName={getActiveOrder.data.order.restaurantName}
+                    totalPrice={getActiveOrder.data.order.totalPrice}
                 />)
             }
       <FooterNavigation/>

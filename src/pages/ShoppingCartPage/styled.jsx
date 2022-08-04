@@ -8,7 +8,7 @@ export const ContainerMain = styled.div`
     margin-bottom: 80px;
     max-width: 1440px;
     margin: 0 auto;
-    margin-bottom: 60px;
+    margin-bottom: 65px;
 `
 
 export const HeaderContainer = styled.div`

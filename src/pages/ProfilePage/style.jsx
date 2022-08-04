@@ -6,6 +6,7 @@ export const Container = styled.div`
     width: 500px;
     margin: 40px auto;
   }
+  margin-bottom: 65px;
 `;
 
 export const UserData = styled.div`
