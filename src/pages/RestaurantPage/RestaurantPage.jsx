@@ -69,7 +69,6 @@ export default function RestaurantPage() {
           </>
         )}
       </Container>
-      <Footer/>
     </>
   );
 }

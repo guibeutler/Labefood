@@ -14,6 +14,9 @@ export const Logo = styled.img`
     width: 100%;
     object-fit: cover;
     border-radius: 8px 8px 0px 0px;
+    @media (min-width: 800px) {
+        height: 250px;
+    }
 `
 
 export const BoxInfos = styled.div`

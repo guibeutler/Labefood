@@ -62,6 +62,7 @@ export default function FeedPage() {
     categoryBar.current.scrollLeft += categoryBar.current.offsetWidth;
   };
 
+
   const categorysName = states.restaurants.map((product) => {
     return product.category;
   });
