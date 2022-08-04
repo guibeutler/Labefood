@@ -13,52 +13,23 @@ import {
   Purchases,
   Line,
 } from "./style";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+
+import React from "react";
 import { BASE_URL, token } from "../../constants/BASE_URL";
 import { MdOutlineModeEdit } from "react-icons/md";
 import { goToAddress, goToSignUp } from "../../routes/Coordinator";
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
+import useRequestData from "../../hooks/useRequestData";
+import { useProtectedPage } from "../../hooks/UseProtectPage";
 
 export default function ProfilePage() {
-  const [user, SetUser] = useState();
-  const [order, setOrder] = useState();
-  const [address, setAddres] = useState();
+  useProtectedPage();
   const navigate = useNavigate();
-
-  const [profileLoading, setProfileLoading] = useState(true);
-  const [orderLoading, setOrderLoading] = useState(true);
-  const [addressLoading, setAddressLoading] = useState(true);
-
-  const getProfile = () => {
-    axios.get(`${BASE_URL}/profile`, token).then((res) => {
-      SetUser(res.data.user);
-      setProfileLoading(false);
-    });
-  };
-
-  const getFullAddress = () => {
-    axios.get(`${BASE_URL}/profile/address`, token).then((res) => {
-      setAddres(res.data.address);
-      setAddressLoading(false);
-    });
-  };
-
-  const ordersHistory = () => {
-    axios.get(`${BASE_URL}/orders/history`, token).then((res) => {
-      setOrder(res.data.orders);
-      setOrderLoading(false);
-    });
-  };
-
-  useEffect(() => {
-    getProfile();
-    getFullAddress();
-    ordersHistory();
-  }, []);
-
+  const users = useRequestData([], `${BASE_URL}/profile`);
+  const addressData = useRequestData([], `${BASE_URL}/profile/address`);
+  const orderData = useRequestData([], `${BASE_URL}/orders/history`);
   function dataAtualFormatada() {
     const data = new Date(),
       dia = data.getDate().toString().padStart(2, "0"),
@@ -68,39 +39,41 @@ export default function ProfilePage() {
   }
 
   const listOrder =
-    order &&
-    order.map((item, index) => {
+    orderData.data.orders &&
+    orderData.data.orders.map((item, index) => {
       return (
         <Card key={index}>
           <Title>{item.restaurantName}</Title>
           <DateProduct>{dataAtualFormatada()}</DateProduct>
-          <Price>SUBTOTAL R${item.totalPrice.toFixed(2).toString().replace(".", ",")}</Price>
+          <Price>
+            SUBTOTAL R${item.totalPrice.toFixed(2).toString().replace(".", ",")}
+          </Price>
         </Card>
       );
     });
 
   return (
     <>
-      <Header text={"Perfil"} button={true} />
+      <Header text={"Perfil"} button={true} buttonLogout={true} />
       <Container>
         <UserData>
-          {profileLoading ? (
+          {users.loading ? (
             <>
-            <p>Carregando...</p>
-            <p>Carregando...</p>
-            <p>Carregando...</p>
+              <p>Carregando...</p>
+              <p>Carregando...</p>
+              <p>Carregando...</p>
             </>
           ) : (
             <>
               <Edit>
-                <p>{user?.name}</p>
+                <p>{users.data.user.name}</p>
                 <MdOutlineModeEdit
                   size={"20px"}
                   onClick={() => goToSignUp(navigate)}
                 />
               </Edit>
-              <p>{user?.email}</p>
-              <p>{user?.cpf}</p>
+              <p>{users.data.user.email}</p>
+              <p>{users.data.user.cpf}</p>
             </>
           )}
         </UserData>
@@ -114,17 +87,19 @@ export default function ProfilePage() {
             />
           </EditAdd>
           <Address>
-            {addressLoading ? (
+            {addressData.loading ? (
               <div>Carregando...</div>
             ) : (
               <p>
-                {address?.neighbourhood}, {address?.street}, N°{address?.number}
+                {addressData.data.address.neighbourhood},{" "}
+                {addressData.data.address.street}, N°
+                {addressData.data.address.number}
               </p>
             )}
           </Address>
         </UserAddress>
 
-        {orderLoading ? (
+        {orderData.loading ? (
           <Purchases>
             <h3>Carregando...</h3>
             <Line></Line>

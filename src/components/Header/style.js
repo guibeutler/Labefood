@@ -16,3 +16,14 @@ export const Button = styled.button`
   position: absolute;
   left: 5vw;
 `;
+
+export const ButtonLogout = styled.button`
+    position:absolute;
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    right: 5vw;
+    padding: 5px;
+    
+    
+`

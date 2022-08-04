@@ -6,11 +6,14 @@ import {BsSearch} from 'react-icons/bs'
 import {Search,Text,Container,Card} from './Styled'
 import {CardRestaurant} from '../../components/CardRestaurant/CardRestaurant'
 import Header from '../../components/Header/Header'
+import { useProtectedPage } from "../../hooks/UseProtectPage";
 
 
 export const SearchPage = () =>{
+    useProtectedPage()
     const[restaurants,setRestaurants] = useState([])
     const[value,setValue] = useState("")
+    
 const getrestaurant = () =>{
     axios.get(`${BASE_URL}/restaurants`,token)
     .then((res)=>{
