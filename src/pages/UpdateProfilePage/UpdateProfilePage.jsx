@@ -1,17 +1,16 @@
 import React from 'react'
 import {useProtectedPage} from '../../hooks/UseUnProtectPage'
 import {ScreenContainer, LogoImage} from "./styled";
-import AddressForm from "./AdressForm";
 import Header from '../../components/Header/Header';
+import UpdateForm from './UpdateForm';
 
-export default function AddressRegistrationPage () {
-
+export default function UpdateProfilePage () {
 
     return (
       <>
       <Header button={true} text={"Endereço"}/>
       <ScreenContainer>
-        <AddressForm/>
+        <UpdateForm/>
     </ScreenContainer>
       </>
     

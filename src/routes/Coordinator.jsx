@@ -34,6 +34,9 @@ export const goToRestaurantDetail = (navigate, id) => {
   navigate(`/restaurant/${id}`);
 };
 
+export const goToUpdate = (navigate) => {
+  navigate('/updateProfile');
+}; 
 
 export const goToBack = (navigate) => {
   navigate(-1);
