@@ -110,10 +110,11 @@ export default function AddressForm() {
         type={"submit"}
         fullWidth
         variant={"contained"}
-        color={"primary"}
+        color={"secondary"}
         margin={"normal"}
-      >
-        <>Cadastrar</>
+        
+        >
+        <>Salvar</>
       </Button>
     </InputsContainer>
   );
