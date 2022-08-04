@@ -1,3 +1,4 @@
+
 import React from "react";
 import { InputsContainer } from "./styled";
 import { TextField, Button, CircularProgress } from "@mui/material";
@@ -7,23 +8,19 @@ import { goToDefault } from "../../routes/Coordinator";
 import { BASE_URL, token } from "../../constants/BASE_URL";
 import axios from "axios";
 
-export default function AddressForm() {
+export default function UpdateForm() {
   const navigate = useNavigate();
   const { form, onChange, clean } = useForm({
-    street: " ",
-    number: " ",
-    neighbourhood: " ",
-    city: " ",
-    state: " ",
-    complement: " ",
+    name: "",
+    email: "",
+    cpf: ""
   });
 
-  const addAddress = (body, navigate) => {
+  const updateProfile = (body, navigate) => {
     axios
-      .put(`${BASE_URL}/address`, body, token)
+      .put(`${BASE_URL}/profile`, body, token)
       .then((res) => {
         console.log(res);
-        localStorage.setItem("token", res.data.token);
         goToDefault(navigate);
       })
       .catch((err) => {
@@ -33,77 +30,46 @@ export default function AddressForm() {
 
   const onSubmitForm = (event) => {
     event.preventDefault();
-    addAddress(form, navigate);
+    updateProfile(form, navigate);
     clean();
   };
   return (
     <InputsContainer>
       <form onSubmit={onSubmitForm}>
         <TextField
-          name={"street"}
-          value={form.street}
+          name={"name"}
+          value={form.name}
           onChange={onChange}
           type="text"
-          label="Logradouro"
+          label="Nome"
           variant="outlined"
           fullWidth
           margin={"normal"}
           required
         />
         <TextField
-          name={"number"}
-          value={form.number}
+          name={"email"}
+          value={form.email}
           onChange={onChange}
-          type="text"
-          label="Número"
+          type="email"
+          label="E-mail"
           variant="outlined"
           fullWidth
           margin={"normal"}
           required
         />
         <TextField
-          name={"neighbourhood"}
-          value={form.neighbourhood}
+          name={"cpf"}
+          value={form.cpf}
           onChange={onChange}
           type="text"
-          label="Bairro"
+          label="CPF"
           variant="outlined"
           fullWidth
           margin={"normal"}
           required
         />
-        <TextField
-          name={"complement"}
-          value={form.complement}
-          onChange={onChange}
-          type="text"
-          label="Complemento"
-          variant="outlined"
-          fullWidth
-          margin={"normal"}
-        />
-        <TextField
-          name={"city"}
-          value={form.city}
-          onChange={onChange}
-          type="Text"
-          label="Cidade"
-          variant="outlined"
-          fullWidth
-          margin={"normal"}
-          required
-        />
-        <TextField
-          name={"state"}
-          value={form.state}
-          onChange={onChange}
-          type="text"
-          label="Estado"
-          variant="outlined"
-          fullWidth
-          margin={"normal"}
-          required
-        />
+       
       </form>
       <Button
         onClick={onSubmitForm}
@@ -113,7 +79,7 @@ export default function AddressForm() {
         color={"primary"}
         margin={"normal"}
       >
-        <>Cadastrar</>
+        <>Alterar</>
       </Button>
     </InputsContainer>
   );

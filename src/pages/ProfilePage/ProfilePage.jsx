@@ -17,7 +17,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { BASE_URL, token } from "../../constants/BASE_URL";
 import { MdOutlineModeEdit } from "react-icons/md";
-import { goToAddress, goToSignUp } from "../../routes/Coordinator";
+import { goToAddress, goToSignUp, goToUpdate } from "../../routes/Coordinator";
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
@@ -96,7 +96,7 @@ export default function ProfilePage() {
                 <p>{user?.name}</p>
                 <MdOutlineModeEdit
                   size={"20px"}
-                  onClick={() => goToSignUp(navigate)}
+                  onClick={() => goToUpdate(navigate)}
                 />
               </Edit>
               <p>{user?.email}</p>
