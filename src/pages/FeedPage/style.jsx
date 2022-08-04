@@ -4,7 +4,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: ${props => props.margin ? '185px' : '58px'}
+  margin-bottom: ${props => props.margin ? '185px' : '65px'}
 `;
 
 export const ContainerRest = styled.div`

@@ -81,7 +81,7 @@ export default function FeedPage() {
   });
 
   return (
-    <Container margin={getActiveOrder.order ? true : false}>
+    <Container margin={getActiveOrder.data.order ? true : false}>
       <Header button={false} text={'Rappi4'} />
       <Search>
         <TextField
@@ -133,13 +133,15 @@ export default function FeedPage() {
         <CardRestaurantFeed />
       )}
       <GoToTop />
-      {getActiveOrder.order && (
-        <OrderActive
-          restaurantName={getActiveOrder.order.restaurantName}
-          totalPrice={getActiveOrder.order.totalPrice}
-        />
-      )}
-      <FooterNavigation />
+
+      {getActiveOrder.data.order &&
+                (<OrderActive
+                    restaurantName={getActiveOrder.data.order.restaurantName}
+                    totalPrice={getActiveOrder.data.order.totalPrice}
+                />)
+            }
+      <FooterNavigation/>
+
     </Container>
   );
 }

@@ -6,8 +6,6 @@ export const Container = styled.div`
     @media(min-width: 768px) {
         margin: 0 auto;
     }
-    margin-bottom: 60px;
-
 `
 
 export const ContainerProdutos = styled.div`

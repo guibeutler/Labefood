@@ -12,7 +12,6 @@ import {
   DateProduct,
   Purchases,
   Line,
-  Fail,
 } from "./style";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -21,6 +20,7 @@ import { MdOutlineModeEdit } from "react-icons/md";
 import { goToAddress, goToSignUp } from "../../routes/Coordinator";
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
 
 export default function ProfilePage() {
   const [user, SetUser] = useState();
@@ -74,7 +74,7 @@ export default function ProfilePage() {
         <Card key={index}>
           <Title>{item.restaurantName}</Title>
           <DateProduct>{dataAtualFormatada()}</DateProduct>
-          <Price>SUBTOTAL R${item.totalPrice}</Price>
+          <Price>SUBTOTAL R${item.totalPrice.toFixed(2).toString().replace(".", ",")}</Price>
         </Card>
       );
     });
@@ -142,6 +142,7 @@ export default function ProfilePage() {
           </Purchases>
         )}
       </Container>
+      <Footer />
     </>
   );
 }

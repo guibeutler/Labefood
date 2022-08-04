@@ -39,7 +39,7 @@ export default function ShoppingCartPage() {
     const getActiveOrder = useRequestData({}, `${BASE_URL}/active-order`)
     const details = states.cartShop.length > 0 && states?.cartShop[0].RestaurantDetails    
     const timeOrder = details && details.deliveryTime * 60 * 1000
-    const address = getAddress.address
+    const address = getAddress.data.address
     const notify = () => toast.error('Removido')
 
     const handleChange = (ev) => {
@@ -89,7 +89,7 @@ export default function ShoppingCartPage() {
             products: productPay,
             paymentMethod: value
         }
-        if (getActiveOrder.order === null) {
+        if (getActiveOrder.data.order === null) {
             axios
                 .post(`${BASE_URL}/restaurants/${id}/order`, body,
                     {
@@ -169,12 +169,14 @@ export default function ShoppingCartPage() {
     return (
         <>
             <Header button={true} text="Meu Carrinho" />
-            <ContainerMain margin={getActiveOrder.order ? true : false}>
+            <ContainerMain margin={getActiveOrder.data.order ? true : false}>
                 <ToastContainer position='top-center' autoClose={1000} />
                 <HeaderContainer>
                     <div>
                         <p>Endereço de entrega</p>
+                        {getAddress.loading ? <h4><b>Carregando...</b></h4> : 
                         <h4><b>{address && address.street}, {address && address.number}</b></h4>
+                    }
                     </div>
                 </HeaderContainer>
 
