@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { BASE_URL, token } from '../constants/BASE_URL';
+import { BASE_URL } from '../constants/BASE_URL';
 
 
 export const useRestaurantDetails = (id) => {
@@ -11,7 +11,11 @@ export const useRestaurantDetails = (id) => {
 
 
     const getRestaurantDe = () => {
-        axios.get(`${BASE_URL}/restaurants/${id}`, token)
+        axios.get(`${BASE_URL}/restaurants/${id}`, {
+            headers: {
+                auth: localStorage.getItem('token'),
+            }
+        })
             .then(res => {
                 setRestaurant(res.data.restaurant)
 
