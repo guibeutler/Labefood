@@ -9,7 +9,7 @@ export default function AddressRegistrationPage () {
 
     return (
       <>
-      <Header button={true} text={"Endereço"}/>
+      <Header button={true} text={"Meu Endereço"}/>
       <ScreenContainer>
         <AddressForm/>
     </ScreenContainer>

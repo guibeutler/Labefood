@@ -8,7 +8,7 @@ export default function UpdateProfilePage () {
 
     return (
       <>
-      <Header button={true} text={"Endereço"}/>
+      <Header button={true} text={"Editar"}/>
       <ScreenContainer>
         <UpdateForm/>
     </ScreenContainer>

@@ -79,7 +79,7 @@ export default function UpdateForm() {
         color={"primary"}
         margin={"normal"}
       >
-        <>Alterar</>
+        <>Salvar</>
       </Button>
     </InputsContainer>
   );
