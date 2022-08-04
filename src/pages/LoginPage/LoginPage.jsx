@@ -1,30 +1,68 @@
-import { TextField, Button } from '@mui/material';
-import React from 'react';
-import Logo from '../../assets/img/logo-login.svg';
-import { useForm } from '../../hooks/UseForm';
-import { useNavigate } from 'react-router-dom';
-import { Container, Form, ButtonSignup } from './styled';
-import axios from 'axios';
-import { BASE_URL } from '../../constants/BASE_URL';
-import { goToFeed, goToSignUp } from '../../routes/Coordinator';
+import { TextField, Button } from "@mui/material";
+import React, { useState } from "react";
+import Logo from "../../assets/img/logo-login.svg";
+import { useForm } from "../../hooks/UseForm";
+import { useNavigate } from "react-router-dom";
+import { Container, Form, ButtonSignup } from "./styled";
+import axios from "axios";
+import { BASE_URL } from "../../constants/BASE_URL";
+import { goToFeed, goToSignUp } from "../../routes/Coordinator";
+
+import IconButton from "@mui/material/IconButton";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputLabel from "@mui/material/InputLabel";
+import InputAdornment from "@mui/material/InputAdornment";
+import FormControl from "@mui/material/FormControl";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { EmailChecker } from "../../utils/EmailChecker";
+import GenericToast from "../../components/GenericToast/GenericToast";
+import { PasswordChecker } from "../../utils/PasswordChecker";
+import { useUnProtectedPage } from "../../hooks/UseUnProtectPage";
 
 export default function LoginPage() {
-  const { form, onChange, clean } = useForm({ email: '', password: '' });
+
+  useUnProtectedPage();
+
+  const { form, onChange } = useForm({ email: "", password: "" });
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+
+  const [error, setError] = useState(false);
+  const [errorEmail, setErrorEmail] = useState(false);
+  const [errorPassword, setErrorPassword] = useState(false);
 
   const onSubmitForm = (event) => {
     event.preventDefault();
-    axios.post(`${BASE_URL}/login`, form).then((res) => {
-      localStorage.setItem('token', res.data.token);
-      goToFeed(navigate);
-      console.log(form);
-    });
+    setError(false);
+    setErrorEmail(false);
+    setErrorPassword(false);
+
+    if (EmailChecker(form.email)) {
+      return setErrorEmail(true);
+    }
+    if (PasswordChecker(form.password)) {
+      return setErrorPassword(true);
+    }
+
+
+    
+
 
     axios.post(`${BASE_URL}/login`, form).then((res) => {
-      localStorage.setItem('token', res.data.token);
+      localStorage.setItem("token", res.data.token);
       goToFeed(navigate);
-      clean();
-    });
+      console.log(form);
+    }).catch((err) => {
+      setError(true);
+      setErrorPassword(false);
+      setErrorEmail(false);
+    })
+
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
   };
 
   return (
@@ -32,23 +70,47 @@ export default function LoginPage() {
       <Container>
         <img src={Logo} alt="Logo Future Eats" />
         <Form onSubmit={onSubmitForm}>
+        <GenericToast open={error} close={setError} severity="error" message="E-mail ou Senha inválidos." />
+        <GenericToast open={errorEmail} close={setErrorEmail} severity="error" message="Digite um e-mail válido" />
+        <GenericToast open={errorPassword} close={setErrorPassword} severity="error" message="Digite uma senha válida" />
+
           <TextField
-            placeholder="Email"
-            type={'text'}
-            name={'email'}
+            placeholder="email@email.com"
+            label="Email"
+            type={"text"}
+            name={"email"}
             value={form.email}
             onChange={onChange}
             required
           />
-          <TextField
-            placeholder="Senha"
-            margin="dense"
-            type={'password'}
-            name={'password'}
-            value={form.password}
-            onChange={onChange}
-            required
-          />
+
+          <FormControl required variant="outlined">
+            <InputLabel htmlFor="outlined-adornment-password">Senha</InputLabel>
+            <OutlinedInput
+
+              placeholder="Mínimo 6 caracteres"
+              margin="dense"
+              id="outlined-adornment-password"
+              type={showPassword ? "text" : "password"}
+              name={"password"}
+              value={form.password}
+              onChange={onChange}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={() => setShowPassword(!showPassword)}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end"
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+              label="Password"
+            />
+          </FormControl>
+
           <Button type="submit" color="primary" variant="contained">
             Entrar
           </Button>
