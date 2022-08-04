@@ -65,14 +65,20 @@ export default function FeedPage() {
     categoryBar.current.scrollLeft += categoryBar.current.offsetWidth;
   };
 
-  const categoryList = states.restaurants.map((item, index) => {
+
+  const categorysName = states.restaurants.map(product => {
+    return product.category
+  })
+
+
+  const categoryList = ([...new Set(categorysName)]).map((item, index) => {
     return (
       <li key={index}>
         <Category
-          selected={category === item.category}
-          onClick={() => setCategory(item.category)}
+          selected={category === item}
+          onClick={() => setCategory(item)}
         >
-          {item.category}
+          {item}
         </Category>
       </li>
     );

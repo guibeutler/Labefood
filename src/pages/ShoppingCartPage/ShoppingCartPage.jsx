@@ -24,7 +24,8 @@ import {
     DivValue, 
     Shipping,
     BoxImage,
-    Button 
+    Button,
+    BoxProducts
 } from './styled'
 
 export default function ShoppingCartPage() {
@@ -185,7 +186,9 @@ export default function ShoppingCartPage() {
                             <p>{details && details.deliveryTime - 10} - {details && details.deliveryTime} min</p>
                         </RestaurantContainer>
 
-                        {renderCart}
+                        <BoxProducts>
+                            {renderCart}
+                        </BoxProducts>
 
                         <Shipping>
                             <h4>Frete R${details && details.shipping},00</h4>

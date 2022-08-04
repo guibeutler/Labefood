@@ -5,8 +5,10 @@ export const ContainerMain = styled.div`
     flex-direction: column;
     align-items: center;
     gap: 16px;
-    /* margin-bottom: ${props => props.margin ? '120px' : '0'}; */
     margin-bottom: 80px;
+    max-width: 1440px;
+    margin: 0 auto;
+    margin-bottom: 60px;
 `
 
 export const HeaderContainer = styled.div`
@@ -47,14 +49,23 @@ export const RestaurantContainer = styled.div`
         color: #e86e5a;
     }
 `
+
+export const BoxProducts = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 10px 10px;
+    gap: 8px;
+
+`
+
 export const Container = styled.div`
     display: flex;
     height: 112px;
     border: 1px solid ${props => props.theme.colors.lightBlueGrey};
     border-radius: 8px;
     position: relative;
-    margin: 10px 10px;
-    min-width: 365px;
+    
 `
 
 export const BoxImage = styled.div`
@@ -147,7 +158,8 @@ export const DivPayment = styled.div`
 `
 
 export const ButtonTwo = styled.button`
-    width: 328px;
+    width: 100vw;
+    max-width: 328px;
     height: 42px;
     padding: 12px 16px;
     border-radius: 2px;
