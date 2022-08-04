@@ -25,14 +25,14 @@ export default function AddressForm() {
     axios
       .put(`${BASE_URL}/address`, body, {
         headers: {
-          Authorization: localStorage.getItem("token"),
+          auth: localStorage.getItem("token"),
         },
-      })
+              })
       .then((res) => {
        console.log(res)
-        // localStorage.setItem("token", res.data.token);
-        // setIsLoading(false);
-        // goToDefault(navigate);
+        localStorage.setItem("token", res.data.token);
+        setIsLoading(false);
+        goToDefault(navigate);
       })
       .catch((err) => {
         setIsLoading(false);
@@ -43,7 +43,7 @@ export default function AddressForm() {
   const onSubmitForm = (event) => {
     event.preventDefault();
     addAddress(form, navigate, setIsLoading);
-    // clean();
+    clean();
   };
   return (
     <InputsContainer>
