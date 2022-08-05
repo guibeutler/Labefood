@@ -8,6 +8,7 @@ const Header = (props) => {
 
   const logout = () => {
     localStorage.clear("token")
+    localStorage.clear("hasAddress")
     goToLogin(navigate)
   }
 

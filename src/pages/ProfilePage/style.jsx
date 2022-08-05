@@ -1,12 +1,8 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  margin-top: 20px;
-  @media screen and (min-device-width: 1200px) {
-    width: 500px;
-    margin: 40px auto;
-  }
-  margin-bottom: 65px;
+  max-width: 1440px;
+  margin: 20px auto 65px auto;
 `;
 
 export const UserData = styled.div`
@@ -47,7 +43,8 @@ export const Card = styled.div`
   gap: 5px;
   border: 1px solid #848282;
   border-radius: 10px;
-  width: 300px;
+  width: 100%;
+  max-width: 320px;
   padding: 15px;
 `;
 export const Price = styled.p`
@@ -66,12 +63,13 @@ export const Purchases = styled.div`
   align-items: center;
   gap:8px;
   margin-top: 5px;
+  padding: 0 5px;
 `;
 export const Line = styled.div`
   background-color: black;
-  width: 350px;
+  width: 95%;
   height: 1px;
-  margin: 10px;
+  margin: 10px auto;
 `;
 export const Fail = styled.div`
   text-align: center;

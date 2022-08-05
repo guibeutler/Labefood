@@ -31,34 +31,33 @@ export default function LoginPage() {
   const [error, setError] = useState(false);
   const [errorEmail, setErrorEmail] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const onSubmitForm = (event) => {
+  async function onSubmitForm (event) {
     event.preventDefault();
     setError(false);
     setErrorEmail(false);
     setErrorPassword(false);
+    setLoading(true);
 
     if (EmailChecker(form.email)) {
+      setLoading(false);
       return setErrorEmail(true);
     }
     if (PasswordChecker(form.password)) {
+      setLoading(false);
       return setErrorPassword(true);
     }
 
-
-    
-
-
-    axios.post(`${BASE_URL}/login`, form).then((res) => {
+    await axios.post(`${BASE_URL}/login`, form).then((res) => {
       localStorage.setItem("token", res.data.token);
       goToFeed(navigate);
-      console.log(form);
     }).catch((err) => {
       setError(true);
       setErrorPassword(false);
       setErrorEmail(false);
     })
-
+    setLoading(false);
   };
 
   const handleMouseDownPassword = (event) => {
@@ -112,7 +111,7 @@ export default function LoginPage() {
           </FormControl>
 
           <Button type="submit" color="primary" variant="contained">
-            Entrar
+            {loading ? "Carregando..." : "Entrar"}
           </Button>
         </Form>
         <ButtonSignup onClick={() => goToSignUp(navigate)}>

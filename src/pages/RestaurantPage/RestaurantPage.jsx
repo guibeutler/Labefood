@@ -12,11 +12,12 @@ import {
 } from "./styled";
 import Loader from "../../components/Loader/Loader";
 import Header from "../../components/Header/Header";
-import Footer from "../../components/Footer/Footer";
+import { useProtectedPage } from "../../hooks/UseProtectPage";
 
 export default function RestaurantPage() {
   const { id } = useParams();
   const { restaurant, categorys, isLoading } = useRestaurantDetails(id);
+  useProtectedPage();
 
   return (
     <>
