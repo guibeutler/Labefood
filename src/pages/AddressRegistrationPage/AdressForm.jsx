@@ -7,15 +7,17 @@ import { goToDefault } from "../../routes/Coordinator";
 import { BASE_URL, token } from "../../constants/BASE_URL";
 import axios from "axios";
 
+
 export default function AddressForm() {
   const navigate = useNavigate();
+  const address = localStorage.getItem("hasAddress") ? JSON.parse(localStorage.getItem("address")) : "";
   const { form, onChange, clean } = useForm({
-    street: " ",
-    number: " ",
-    neighbourhood: " ",
-    city: " ",
-    state: " ",
-    complement: " ",
+    street:address ? address.street : "",
+    number: address ? address.number : "",
+    neighbourhood: address ? address.neighbourhood : "",
+    city: address ? address.city : "",
+    state: address ? address.state : "",
+    complement: address ? address.complement : "",
   });
 
   const addAddress = (body, navigate) => {
@@ -37,6 +39,7 @@ export default function AddressForm() {
     addAddress(form, navigate);
     clean();
   };
+
   return (
     <InputsContainer>
       <form onSubmit={onSubmitForm}>
@@ -107,6 +110,7 @@ export default function AddressForm() {
         />
       </form>
       <Button
+        style={{ marginTop: "16px" }}
         onClick={onSubmitForm}
         type={"submit"}
         fullWidth

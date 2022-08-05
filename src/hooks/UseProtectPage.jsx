@@ -22,10 +22,21 @@ export const useProtectedPage = () =>{
         }).then((res) => {
            if(res.data.user.hasAddress){
                 localStorage.setItem("hasAddress", true);
+                localStorage.setItem("user", JSON.stringify(res.data.user));
            } else {
             goToAddress(navigate)
            }
         })
+
+
+        axios.get(`${BASE_URL}/profile/address`, {
+            headers: {
+                auth: localStorage.getItem("token"),
+            }
+        }).then((res) => {
+           if(localStorage.getItem("hasAddress")){
+                localStorage.setItem("address", JSON.stringify(res.data.address));
+            }})
     }
     } else {
         goToLogin(navigate)
