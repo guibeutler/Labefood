@@ -60,6 +60,7 @@ Ferramentas
 Para o desenvolvimento do projeto foram utilizadas as seguintes ferramentas:
 
 ReactJS.
+
 Styled Components.
 
 Axios.
