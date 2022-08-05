@@ -10,10 +10,11 @@ import axios from "axios";
 
 export default function UpdateForm() {
   const navigate = useNavigate();
+  const user = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : "";
   const { form, onChange, clean } = useForm({
-    name: "",
-    email: "",
-    cpf: ""
+    name: user ? user.name : "",
+    email: user ? user.email : "",
+    cpf: user ? user.cpf : "",
   });
 
   const updateProfile = (body, navigate) => {

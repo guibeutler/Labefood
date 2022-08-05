@@ -109,6 +109,7 @@ export default function SignUpForm() {
         />
       </form>
       <Button
+        style={{ marginTop: "16px" }}
         onClick={onSubmitForm}
         type={"submit"}
         fullWidth

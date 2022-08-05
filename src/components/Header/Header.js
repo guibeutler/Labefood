@@ -7,8 +7,7 @@ import {MdOutlineLogout} from 'react-icons/md'
 const Header = (props) => {
 
   const logout = () => {
-    localStorage.clear("token")
-    localStorage.clear("hasAddress")
+    localStorage.clear()
     goToLogin(navigate)
   }
 
