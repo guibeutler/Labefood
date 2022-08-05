@@ -59,12 +59,12 @@ http://rappi.surge.sh/
 Ferramentas
 Para o desenvolvimento do projeto foram utilizadas as seguintes ferramentas:
 
-ReactJS
-Styled Components
-Axios
-React Select
-React Icons
-Material Ui
+ReactJS.
+Styled Components.
+Axios.
+React Select.
+React Icons.
+Material Ui.
 
 Trello
 https://trello.com/b/5qfJvmrT/labefood
