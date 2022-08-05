@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
-import { BASE_URL, token } from '../../constants/BASE_URL'
+import { useNavigate } from 'react-router-dom';
+import { BASE_URL } from '../../constants/BASE_URL'
 import { useContext, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { Radio, RadioGroup, FormControlLabel, FormControl } from '@mui/material'
@@ -10,6 +11,8 @@ import Swal from 'sweetalert2';
 import axios from 'axios'
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer'
+import { goToFeed } from '../../routes/Coordinator';
+import { useProtectedPage } from '../../hooks/UseProtectPage';
 import { 
     RestaurantContainer, 
     HeaderContainer, 
@@ -29,6 +32,8 @@ import {
 } from './styled'
 
 export default function ShoppingCartPage() {
+    useProtectedPage();
+    const navigate = useNavigate();
     const { states, setters } = useContext(GlobalContext);
     const [valueToPay, setValueToPay] = useState(0)
     const [value, setValue] = useState('')
@@ -80,7 +85,7 @@ export default function ShoppingCartPage() {
         states.cartShop && states.cartShop.forEach((prod) => {
             productPay.push({
                 id: prod.ProductId,
-                quantity: parseInt(prod.Quantity, 9)
+                quantity:  parseInt(prod.Quantity) ? parseInt(prod.Quantity) : 1 ,
 
             })
         })
@@ -106,6 +111,7 @@ export default function ShoppingCartPage() {
                     }, timeOrder)
                     if (response.status === 200)
                         setters.setCartShop([])
+                        goToFeed(navigate)
                 })
             setControl(control + 1)
             let timeInterval
@@ -144,10 +150,10 @@ export default function ShoppingCartPage() {
 
     }
 
-    const renderCart = states.cartShop && states.cartShop.map((prod) => {
+    const renderCart = states.cartShop && states.cartShop.map((prod, i) => {
 
         return (
-            <Container key={prod.id}>
+            <Container key={i}>
                 <BoxImage>
                     <ProductImage src={prod.Image} alt={'foto do produto'} />
                 </BoxImage>

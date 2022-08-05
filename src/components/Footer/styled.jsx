@@ -4,6 +4,7 @@ import Toolbar from "@mui/material/Toolbar";
 export const Container = styled.div`
     width: 100vw;
     display: flex;
+    align-items: center;
     justify-content: center;
     background-color: #ffff;
     height: 56px;
@@ -15,12 +16,13 @@ export const Container = styled.div`
     bottom: 0;
 `
 
-export const StyledToolbar = styled(Toolbar) `
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-`
+
 
 export const BoxFooter = styled.div`
-    max-width: 380px;
+    width: 100vw;
+    max-width: 1440px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 `

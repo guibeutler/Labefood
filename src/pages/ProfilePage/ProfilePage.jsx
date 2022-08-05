@@ -25,22 +25,28 @@ import useRequestData from "../../hooks/useRequestData";
 import { useProtectedPage } from "../../hooks/UseProtectPage";
 
 export default function ProfilePage() {
+  
   useProtectedPage();
+
   const navigate = useNavigate();
   const users = useRequestData([], `${BASE_URL}/profile`);
   const addressData = useRequestData([], `${BASE_URL}/profile/address`);
   const orderData = useRequestData([], `${BASE_URL}/orders/history`);
-  function dataAtualFormatada() {
-    const data = new Date(),
-      dia = data.getDate().toString().padStart(2, "0"),
-      mes = (data.getMonth() + 1).toString().padStart(2, "0"),
-      ano = data.getFullYear();
-    return dia + "/" + mes + "/" + ano;
-  }
+
 
   const listOrder =
-    orderData.data.orders &&
-    orderData.data.orders.map((item, index) => {
+    orderData?.data?.orders &&
+    orderData?.data?.orders.map((item, index) => {
+
+      const dataAtualFormatada = () => {
+        const data = new Date(item.createdAt),
+          dia = data.getDate().toString().padStart(2, "0"),
+          mes = (data.getMonth() + 1).toString().padStart(2, "0"),
+          ano = data.getFullYear();
+        return dia + "/" + mes + "/" + ano;
+      }
+
+
       return (
         <Card key={index}>
           <Title>{item.restaurantName}</Title>
@@ -91,9 +97,9 @@ export default function ProfilePage() {
               <div>Carregando...</div>
             ) : (
               <p>
-                {addressData.data.address.neighbourhood},{" "}
-                {addressData.data.address.street}, N°
-                {addressData.data.address.number}
+                {addressData?.data?.address?.neighbourhood},{" "}
+                {addressData?.data?.address?.street}, N°
+                {addressData?.data?.address?.number}
               </p>
             )}
           </Address>

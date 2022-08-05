@@ -1,43 +1,69 @@
-import React, { useState } from 'react';
-import { Box, BottomNavigation, BottomNavigationAction } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import { goToFeed, goToProfile, goToShoppingCart } from '../../routes/Coordinator';
-import { AiFillHome } from 'react-icons/ai';
-import { HiShoppingCart } from 'react-icons/hi';
-import { RiAccountCircleFill } from 'react-icons/ri';
-import { Container, BoxFooter } from './styled'
+import React from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import {
+  goToFeed,
+  goToProfile,
+  goToShoppingCart,
+} from "../../routes/Coordinator";
+import { AiOutlineHome } from "react-icons/ai";
+import { HiOutlineShoppingCart } from "react-icons/hi";
+import { RiAccountCircleLine } from "react-icons/ri";
+import { Container, BoxFooter } from "./styled";
 
 export default function FooterNavigation() {
   const navigate = useNavigate();
-  const [value, setValue] = useState(0);
-  
+  const location = useLocation();
+
   return (
     <Container>
       <BoxFooter>
-        <Box sx={{ width: "300px"}}>
-          <BottomNavigation
-            showLabels
-            value={value}
-            onChange={(event, newValue) => {
-              setValue(newValue);
-            }}
-          >
-            <BottomNavigationAction
-              onClick={() => goToFeed(navigate)}
-              icon={<AiFillHome
-              size={'32px'} />}
-            />
-            <BottomNavigationAction
-              onClick={() => goToShoppingCart(navigate)}
-              icon={<HiShoppingCart
-              size={'32px'} />}
-            />
-            <BottomNavigationAction
-              onClick={() => goToProfile(navigate)}
-              icon={<RiAccountCircleFill
-              size={'32px'} />} />
-          </BottomNavigation>
-        </Box>
+        {location.pathname === "/feed" ? (
+          <AiOutlineHome
+            style={{ cursor: "pointer" }}
+            size={30}
+            onClick={() => goToFeed(navigate)}
+            color="#e86e5a"
+          />
+        ) : (
+          <AiOutlineHome
+            style={{ cursor: "pointer" }}
+            size={30}
+            onClick={() => goToFeed(navigate)}
+            color="#B4B3B4"
+          />
+        )}
+
+        {location.pathname === "/shoppingcart" ? (
+          <HiOutlineShoppingCart
+            style={{ cursor: "pointer" }}
+            size={30}
+            onClick={() => goToShoppingCart(navigate)}
+            color="#e86e5a"
+          />
+        ) : (
+          <HiOutlineShoppingCart
+            style={{ cursor: "pointer" }}
+            size={30}
+            onClick={() => goToShoppingCart(navigate)}
+            color="#B4B3B4"
+          />
+        )}
+
+        {location.pathname === "/profile" ? (
+          <RiAccountCircleLine
+            style={{ cursor: "pointer" }}
+            size={30}
+            onClick={() => goToProfile(navigate)}
+            color="#e86e5a"
+          />
+        ) : (
+          <RiAccountCircleLine
+            style={{ cursor: "pointer" }}
+            size={30}
+            onClick={() => goToProfile(navigate)}
+            color="#B4B3B4"
+          />
+        )}
       </BoxFooter>
     </Container>
   );

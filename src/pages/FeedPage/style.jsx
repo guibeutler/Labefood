@@ -4,7 +4,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: ${props => props.margin ? '185px' : '65px'}
+  margin-bottom: ${props => props.margin ? '185px' : '65px'};
 `;
 
 export const ContainerRest = styled.div`
@@ -36,7 +36,8 @@ export const Info = styled.div`
 `;
 
 export const CategoryNavBar = styled.nav`
-  width: 100vw;
+max-width: 1440px;
+  width: 95vw;
   display: flex;
   text-align: center;
   align-items: center;
@@ -54,7 +55,7 @@ export const CategoryNavBar = styled.nav`
   ul::-webkit-scrollbar {
     display: none;
   }
-  @media (min-width: 800px) {
+  @media (min-width: 676px) {
     width: 60vw;
     li {
       margin: 0px auto;
@@ -63,6 +64,7 @@ export const CategoryNavBar = styled.nav`
 `;
 
 export const Search = styled.div`
+  max-width: 1440px;
     margin: 10px;
     input{
       width:80vw;
@@ -89,6 +91,7 @@ export const Category = styled.button`
 `;
 
 export const ContainerLoader = styled.div`
+  max-width: 1440px;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;

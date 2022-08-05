@@ -24,8 +24,12 @@ import LoaderCard from '../../components/LoaderCard/LoaderCard';
 import FooterNavigation from '../../components/Footer/Footer';
 import OrderActive from './OrderActive';
 import useRequestData from '../../hooks/useRequestData';
+import { useProtectedPage } from '../../hooks/UseProtectPage';
 
 export default function FeedPage() {
+
+  useProtectedPage();
+
   const { states, setters } = useContext(GlobalContext);
   const [category, setCategory] = useState('');
   const categoryBar = useRef(null);
@@ -84,7 +88,7 @@ export default function FeedPage() {
     <Container margin={getActiveOrder.data.order ? true : false}>
       <Header button={false} text={'Rappi4'} />
       <Search>
-        <TextField
+        <TextField sx={{width: '100%'}}
           onClick={() => goToSearch(navigate)}
           label="Busca"
           placeholder={'Restaurantes'}

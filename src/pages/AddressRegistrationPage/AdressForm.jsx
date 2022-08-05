@@ -25,6 +25,7 @@ export default function AddressForm() {
         console.log(res);
         localStorage.setItem("token", res.data.token);
         goToDefault(navigate);
+        localStorage.setItem("hasAddress", true);
       })
       .catch((err) => {
         alert(err.response.data.message);
