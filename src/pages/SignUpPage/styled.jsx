@@ -17,11 +17,6 @@ export const InputsContainer = styled.div`
   margin-bottom: 20px;
 `
 
-export const SignUpButtonContainer = styled.div`
-  width: 80vw;
-  max-width: 450px;
-`
-
 export const LogoImage = styled.img`
   width: 104px;
   height: 58px;

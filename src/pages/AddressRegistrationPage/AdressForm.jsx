@@ -1,18 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { InputsContainer } from "./styled";
-import { TextField, Button, CircularProgress } from "@mui/material";
+import { TextField, Button, CircularProgress, FormHelperText } from "@mui/material";
 import { useForm } from "../../hooks/UseForm";
 import { useNavigate } from "react-router-dom";
 import { goToDefault } from "../../routes/Coordinator";
 import { BASE_URL, token } from "../../constants/BASE_URL";
+import { EstadoChecker } from "../../utils/EstadoChecker";
+import GenericToast from "../../components/GenericToast/GenericToast";
 import axios from "axios";
-
 
 export default function AddressForm() {
   const navigate = useNavigate();
-  const address = localStorage.getItem("hasAddress") ? JSON.parse(localStorage.getItem("address")) : "";
+  const address = localStorage.getItem("hasAddress")
+    ? JSON.parse(localStorage.getItem("address"))
+    : "";
+  const [invalidState, setInvalidState] = useState(false);
   const { form, onChange, clean } = useForm({
-    street:address ? address.street : "",
+    street: address ? address.street : "",
     number: address ? address.number : "",
     neighbourhood: address ? address.neighbourhood : "",
     city: address ? address.city : "",
@@ -27,7 +31,8 @@ export default function AddressForm() {
         console.log(res);
         localStorage.setItem("token", res.data.token);
         goToDefault(navigate);
-        localStorage.setItem("hasAddress", true);
+        localStorage.removeItem("hasAddress");
+        clean();
       })
       .catch((err) => {
         alert(err.response.data.message);
@@ -36,13 +41,18 @@ export default function AddressForm() {
 
   const onSubmitForm = (event) => {
     event.preventDefault();
-    addAddress(form, navigate);
-    clean();
+    if (!EstadoChecker(form.state)) {
+      addAddress(form, navigate);
+      setInvalidState(false);
+    } else {
+      setInvalidState(true);
+    }
   };
 
   return (
     <InputsContainer>
       <form onSubmit={onSubmitForm}>
+        <GenericToast open={invalidState}  close={setInvalidState} severity={"error"} message="Estado inválido" />
         <TextField
           name={"street"}
           value={form.street}
@@ -100,6 +110,7 @@ export default function AddressForm() {
         <TextField
           name={"state"}
           value={form.state}
+          placeholder="SP"
           onChange={onChange}
           type="text"
           label="Estado"
@@ -107,20 +118,24 @@ export default function AddressForm() {
           fullWidth
           margin={"normal"}
           required
+          inputProps={{maxLength: 2, minLength: 2, pattern:"[A-Za-z]{2}", title: "Somente letras"}}
         />
-      </form>
-      <Button
-        style={{ marginTop: "16px" }}
-        onClick={onSubmitForm}
-        type={"submit"}
-        fullWidth
-        variant={"contained"}
-        color={"secondary"}
-        margin={"normal"}
-        
+        {form.state === "" ? null : EstadoChecker(form.state) && (
+          <FormHelperText error>
+            Estado inválido
+          </FormHelperText>
+        )} 
+        <Button
+          style={{ marginTop: "16px" }}
+          type={"submit"}
+          fullWidth
+          variant={"contained"}
+          color={"secondary"}
+          margin={"normal"}
         >
-        <>Salvar</>
-      </Button>
+          <>Salvar</>
+        </Button>
+      </form>
     </InputsContainer>
   );
 }

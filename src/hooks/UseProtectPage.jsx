@@ -1,52 +1,55 @@
-import { useEffect } from "react"
-import { useNavigate } from "react-router-dom"
-import { goToLogin, goToAddress } from "../routes/Coordinator"
-import { BASE_URL } from "../constants/BASE_URL"
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { goToLogin, goToAddress } from "../routes/Coordinator";
+import { BASE_URL } from "../constants/BASE_URL";
 
-import axios from "axios"
+import axios from "axios";
 
+export const useProtectedPage = () => {
+  const navigate = useNavigate();
 
-export const useProtectedPage = () =>{
-
-    const navigate = useNavigate()
-
-    async function getEndress () {
-
-        if(localStorage.getItem("token")){
-
-        if(!localStorage.getItem("hasAddress") || localStorage.getItem("hasAddress") === false){
-        await axios.get(`${BASE_URL}/profile`, {
+  async function getEndress() {
+    if (localStorage.getItem("token")) {
+        let haveAddress = true;
+      if (
+        !localStorage.getItem("hasAddress") ||
+        localStorage.getItem("hasAddress") === false
+      ) {
+        await axios
+          .get(`${BASE_URL}/profile`, {
             headers: {
-                auth: localStorage.getItem("token"),
+              auth: localStorage.getItem("token"),
+            },
+          })
+          .then((res) => {
+            if (res.data.user.hasAddress) {
+              localStorage.setItem("hasAddress", true);
+              localStorage.setItem("user", JSON.stringify(res.data.user));
+                haveAddress = true;
+            } else {
+              goToAddress(navigate);
+              haveAddress = false;
             }
-        }).then((res) => {
-           if(res.data.user.hasAddress){
-                localStorage.setItem("hasAddress", true);
-                localStorage.setItem("user", JSON.stringify(res.data.user));
-           } else {
-            goToAddress(navigate)
-           }
-        })
+          });
 
-
-        axios.get(`${BASE_URL}/profile/address`, {
+        await axios
+          .get(`${BASE_URL}/profile/address`, {
             headers: {
-                auth: localStorage.getItem("token"),
+              auth: localStorage.getItem("token"),
+            },
+          })
+          .then((res) => {
+            if (localStorage.getItem("hasAddress") || haveAddress) {
+              localStorage.setItem("address", JSON.stringify(res.data.address));
             }
-        }).then((res) => {
-           if(localStorage.getItem("hasAddress")){
-                localStorage.setItem("address", JSON.stringify(res.data.address));
-            }})
-    }
+          });
+      }
     } else {
-        goToLogin(navigate)
+      goToLogin(navigate);
     }
+  }
 
-
-    }
-
-    useEffect(() => {
-        getEndress();
-    } , [])
-
-}
+  useEffect(() => {
+    getEndress();
+  }, []);
+};
