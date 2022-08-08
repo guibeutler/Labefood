@@ -58,7 +58,7 @@
 http://rappi.surge.sh/
 
 ### LOGIN : 
-#### EMAIL: admin@dev.com
+#### EMAIL: admin@dev.com.br
 #### SENHA: P@ssw0rd
 
 ---
