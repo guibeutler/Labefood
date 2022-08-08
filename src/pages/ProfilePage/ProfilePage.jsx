@@ -3,6 +3,7 @@ import {
   UserData,
   UserAddress,
   Edit,
+  UserName,
   Address,
   Text,
   EditAdd,
@@ -72,7 +73,7 @@ export default function ProfilePage() {
           ) : (
             <>
               <Edit>
-                <p>{users.data.user.name}</p>
+                <UserName>{users.data.user.name}</UserName>
                 <MdOutlineModeEdit
                   size={"20px"}
                   onClick={() => goToUpdate(navigate)}

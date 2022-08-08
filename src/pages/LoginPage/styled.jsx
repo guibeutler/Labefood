@@ -13,8 +13,7 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   width: 80vw;
-  max-width: 400px;
-  gap: 16px;
+  max-width: 450px;
 `
 
 export const ButtonSignup = styled.button`

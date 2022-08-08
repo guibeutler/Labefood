@@ -1,16 +1,20 @@
-
-import React from "react";
+import React, { useState } from "react";
 import { InputsContainer } from "./styled";
-import { TextField, Button, CircularProgress } from "@mui/material";
+import { TextField, Button, CircularProgress, FormHelperText } from "@mui/material";
 import { useForm } from "../../hooks/UseForm";
 import { useNavigate } from "react-router-dom";
 import { goToDefault } from "../../routes/Coordinator";
 import { BASE_URL, token } from "../../constants/BASE_URL";
+import { EmailChecker } from "../../utils/EmailChecker";
+import GenericToast from "../../components/GenericToast/GenericToast";
 import axios from "axios";
 
 export default function UpdateForm() {
   const navigate = useNavigate();
-  const user = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : "";
+  const [inputError, setInputError] = useState(false);
+  const user = localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user"))
+    : "";
   const { form, onChange, clean } = useForm({
     name: user ? user.name : "",
     email: user ? user.email : "",
@@ -21,8 +25,8 @@ export default function UpdateForm() {
     axios
       .put(`${BASE_URL}/profile`, body, token)
       .then((res) => {
-        console.log(res);
         goToDefault(navigate);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
       })
       .catch((err) => {
         alert(err.response.data.message);
@@ -31,15 +35,24 @@ export default function UpdateForm() {
 
   const onSubmitForm = (event) => {
     event.preventDefault();
-    updateProfile(form, navigate);
-    clean();
+    if (!EmailChecker(form.email) && 
+    /^([a-zA-Z]+[ ][a-zA-Z]+)*$/.test(form.name)) {
+      updateProfile(form, navigate);
+    } else {
+      setInputError(true);
+    }
+    
   };
   return (
     <InputsContainer>
       <form onSubmit={onSubmitForm}>
+        <GenericToast open={inputError} close={setInputError} severity={"error"} message="Preencha os campos corretamente" />
         <TextField
           name={"name"}
           value={form.name}
+          mask={"[A-Z].* [A-Z].*"}
+          inputProps={{ pattern: "[a-zA-Z].* [a-zA-Z].*", title: "Digite seu NOME e SOBRENOME" }}
+          placeholder={"Nome e Sobrenome"}
           onChange={onChange}
           type="text"
           label="Nome"
@@ -48,6 +61,14 @@ export default function UpdateForm() {
           margin={"normal"}
           required
         />
+        {form.name === "" 
+        ? null
+        : !/^([a-zA-Z]+[ ][a-zA-Z]+)*$/.test(form.name) && (
+          <FormHelperText error>
+            Nome e Sobrenome inválidos
+          </FormHelperText>
+        )}
+
         <TextField
           name={"email"}
           value={form.email}
@@ -59,6 +80,13 @@ export default function UpdateForm() {
           margin={"normal"}
           required
         />
+
+        {form.email === ""
+          ? null
+          : EmailChecker(form.email) && (
+              <FormHelperText error>Digite um E-mail Valido.</FormHelperText>
+        )}
+
         <TextField
           name={"cpf"}
           value={form.cpf}
@@ -69,19 +97,18 @@ export default function UpdateForm() {
           fullWidth
           margin={"normal"}
           required
+          disabled
         />
-       
+        <Button style={{ marginTop: "16px" }}
+          type={"submit"}
+          fullWidth
+          variant={"contained"}
+          color={"primary"}
+          margin={"normal"}
+        >
+          <>Salvar</>
+        </Button>
       </form>
-      <Button
-        onClick={onSubmitForm}
-        type={"submit"}
-        fullWidth
-        variant={"contained"}
-        color={"primary"}
-        margin={"normal"}
-      >
-        <>Salvar</>
-      </Button>
     </InputsContainer>
   );
 }

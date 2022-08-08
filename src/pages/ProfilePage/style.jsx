@@ -28,6 +28,11 @@ export const Edit = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+
+export const UserName = styled.p`
+  text-transform: uppercase !important;
+`
+
 export const EditAdd = styled.div`
   display: flex;
   justify-content: space-between;

@@ -1,4 +1,4 @@
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, FormHelperText } from "@mui/material";
 import React, { useState } from "react";
 import Logo from "../../assets/img/logo-login.svg";
 import { useForm } from "../../hooks/UseForm";
@@ -73,7 +73,8 @@ export default function LoginPage() {
         <GenericToast open={errorEmail} close={setErrorEmail} severity="error" message="Digite um e-mail válido" />
         <GenericToast open={errorPassword} close={setErrorPassword} severity="error" message="Digite uma senha válida" />
 
-          <TextField
+          <TextField style={{margin: "16px 0 8px 0"}}
+            error={form.email === "" ? false : EmailChecker(form.email)}
             placeholder="email@email.com"
             label="Email"
             type={"text"}
@@ -82,11 +83,14 @@ export default function LoginPage() {
             onChange={onChange}
             required
           />
+          {form.email === "" ? false : EmailChecker(form.email) && (
+            <FormHelperText error>Digite um e-mail válido</FormHelperText>
+          )}
 
-          <FormControl required variant="outlined">
+          <FormControl style={{margin: "16px 0 8px 0"}} required variant="outlined">
             <InputLabel htmlFor="outlined-adornment-password">Senha</InputLabel>
             <OutlinedInput
-
+              error={form.password === "" ? false : PasswordChecker(form.password)}
               placeholder="Mínimo 6 caracteres"
               margin="dense"
               id="outlined-adornment-password"
@@ -109,8 +113,12 @@ export default function LoginPage() {
               label="Password"
             />
           </FormControl>
-
-          <Button type="submit" color="primary" variant="contained">
+          {form.password === ""
+          ? null
+          : PasswordChecker(form.password) && (
+              <FormHelperText error>Digite uma senha valida.</FormHelperText>
+        )}
+          <Button style={{marginTop: "16px"}} type="submit" color="primary" variant="contained">
             {loading ? "Carregando..." : "Entrar"}
           </Button>
         </Form>
