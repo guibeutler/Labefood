@@ -4,13 +4,14 @@ import { TextField, Button, CircularProgress, FormHelperText } from "@mui/materi
 import { useForm } from "../../hooks/UseForm";
 import { useNavigate } from "react-router-dom";
 import { goToDefault } from "../../routes/Coordinator";
-import { BASE_URL, token } from "../../constants/BASE_URL";
+import { BASE_URL } from "../../constants/BASE_URL";
 import { EstadoChecker } from "../../utils/EstadoChecker";
 import GenericToast from "../../components/GenericToast/GenericToast";
 import axios from "axios";
 
 export default function AddressForm() {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const address = localStorage.getItem("hasAddress")
     ? JSON.parse(localStorage.getItem("address"))
     : "";
@@ -25,17 +26,24 @@ export default function AddressForm() {
   });
 
   const addAddress = (body, navigate) => {
+    setLoading(true);
     axios
-      .put(`${BASE_URL}/address`, body, token)
+      .put(`${BASE_URL}/address`, body, {
+        headers: {
+          auth: localStorage.getItem("token"),
+        }
+      })
       .then((res) => {
         console.log(res);
         localStorage.setItem("token", res.data.token);
         goToDefault(navigate);
         localStorage.removeItem("hasAddress");
         clean();
+        setLoading(false);
       })
       .catch((err) => {
         alert(err.response.data.message);
+        setLoading(false);
       });
   };
 
@@ -133,7 +141,7 @@ export default function AddressForm() {
           color={"secondary"}
           margin={"normal"}
         >
-          <>Salvar</>
+          <>{loading ? <CircularProgress size={24} /> : "Salvar"}</>
         </Button>
       </form>
     </InputsContainer>

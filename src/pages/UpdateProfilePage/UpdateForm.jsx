@@ -11,6 +11,7 @@ import axios from "axios";
 
 export default function UpdateForm() {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [inputError, setInputError] = useState(false);
   const user = localStorage.getItem("user")
     ? JSON.parse(localStorage.getItem("user"))
@@ -27,9 +28,11 @@ export default function UpdateForm() {
       .then((res) => {
         goToDefault(navigate);
         localStorage.setItem("user", JSON.stringify(res.data.user));
+        setLoading(false);
       })
       .catch((err) => {
         alert(err.response.data.message);
+        setLoading(false);
       });
   };
 
@@ -106,7 +109,7 @@ export default function UpdateForm() {
           color={"primary"}
           margin={"normal"}
         >
-          <>Salvar</>
+          <>{loading ? <CircularProgress size={24} /> : "Salvar"}</>
         </Button>
       </form>
     </InputsContainer>

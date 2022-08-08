@@ -1,4 +1,4 @@
-import { TextField, Button, FormHelperText } from "@mui/material";
+import { TextField, Button, FormHelperText, CircularProgress } from "@mui/material";
 import React, { useState } from "react";
 import Logo from "../../assets/img/logo-login.svg";
 import { useForm } from "../../hooks/UseForm";
@@ -119,7 +119,7 @@ export default function LoginPage() {
               <FormHelperText error>Digite uma senha valida.</FormHelperText>
         )}
           <Button style={{marginTop: "16px"}} type="submit" color="primary" variant="contained">
-            {loading ? "Carregando..." : "Entrar"}
+            {loading ? <CircularProgress color={"inherit"} size={"24px"} /> : "Entrar"}
           </Button>
         </Form>
         <ButtonSignup onClick={() => goToSignUp(navigate)}>
