@@ -57,6 +57,10 @@
 ## LINK SURGE
 http://rappi.surge.sh/
 
+### LOGIN : 
+#### EMAIL: admin@dev.com
+#### SENHA: P@ssw0rd
+
 ---
 
 ## Ferramentas
