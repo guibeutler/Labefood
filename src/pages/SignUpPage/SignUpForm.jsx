@@ -73,7 +73,7 @@ export default function SignUpForm() {
       !EmailChecker(form.email) &&
       !PasswordChecker(form.password) &&
       !CpfChecker(form.cpf) &&
-      /^([a-zA-Z]+[ ][a-zA-Z]+)*$/.test(form.name)
+      /^([a-zA-ZÀ-ú]+[ ][a-zA-ZÀ-ú]+)*$/.test(form.name)
     ) {
       signUp(form, navigate, setIsLoading);
     } else {
@@ -101,9 +101,9 @@ export default function SignUpForm() {
           required
           name={"name"}
           value={form.name}
-          mask={"[a-zA-Z].* [a-zA-Z].*"}
+          mask={"[a-zA-ZÀ-ú].* [a-zA-ZÀ-ú].*"}
           inputProps={{
-            pattern: "[a-zA-Z].* [a-zA-Z].*",
+            pattern: "[a-zA-ZÀ-ú].* [a-zA-ZÀ-ú].*",
             title: "Digite seu NOME e SOBRENOME",
           }}
           onChange={onChange}
@@ -116,7 +116,7 @@ export default function SignUpForm() {
         />
         {form.name === ""
           ? null
-          : !/^([a-zA-Z]+[ ][a-zA-Z]+)*$/.test(form.name) && (
+          : !/^([a-zA-ZÀ-ú]+[ ][a-zA-ZÀ-ú]+)*$/.test(form.name) && (
               <FormHelperText error>Nome e Sobrenome inválidos</FormHelperText>
             )}
         <TextField

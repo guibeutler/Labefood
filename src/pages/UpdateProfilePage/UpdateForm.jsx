@@ -36,7 +36,7 @@ export default function UpdateForm() {
   const onSubmitForm = (event) => {
     event.preventDefault();
     if (!EmailChecker(form.email) && 
-    /^([a-zA-Z]+[ ][a-zA-Z]+)*$/.test(form.name)) {
+    /^([a-zA-ZÀ-ú]+[ ][a-zA-ZÀ-ú]+)*$/.test(form.name)) {
       updateProfile(form, navigate);
     } else {
       setInputError(true);
@@ -50,8 +50,8 @@ export default function UpdateForm() {
         <TextField
           name={"name"}
           value={form.name}
-          mask={"[A-Z].* [A-Z].*"}
-          inputProps={{ pattern: "[a-zA-Z].* [a-zA-Z].*", title: "Digite seu NOME e SOBRENOME" }}
+          mask={"[A-ZÀ-ú].* [A-ZÀ-ú].*"}
+          inputProps={{ pattern: "[a-zA-ZÀ-ú].* [a-zA-ZÀ-ú].*", title: "Digite seu NOME e SOBRENOME" }}
           placeholder={"Nome e Sobrenome"}
           onChange={onChange}
           type="text"
@@ -63,7 +63,7 @@ export default function UpdateForm() {
         />
         {form.name === "" 
         ? null
-        : !/^([a-zA-Z]+[ ][a-zA-Z]+)*$/.test(form.name) && (
+        : !/^([a-zA-ZÀ-ú]+[ ][a-zA-ZÀ-ú]+)*$/.test(form.name) && (
           <FormHelperText error>
             Nome e Sobrenome inválidos
           </FormHelperText>
