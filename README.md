@@ -37,7 +37,7 @@
     - O usuário deve ser capaz de visualizar o seu histórico de pedidos concluídos (após o tempo de entrega do estabelecimento, o seu pedido aparece nessa lista?)
 
 - RESPONSIVIDADE
-    - O projeto foiu desenvolvido nativamente para celulares (mobile first), porém é responsivo a todas as resoluções.
+    - O projeto foi desenvolvido nativamente para celulares (mobile first), porém é responsivo a todas as resoluções.
 ---
 
 ## 💼 DESENVOLVEDORES
